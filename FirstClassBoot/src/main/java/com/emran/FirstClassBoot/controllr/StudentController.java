@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.management.StringValueExp;
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -30,5 +31,11 @@ return "savestudentform";
         studentService.saveStu(student);
 
 return "redirect:/";
+    }
+    @RequestMapping("/showAllStudent")
+    public String showAllStudent(Model m){
+        List<Student>stuList=studentService.getAllstu();
+        m.addAttribute("stuList",stuList);
+        return "showAllStudent";
     }
 }
