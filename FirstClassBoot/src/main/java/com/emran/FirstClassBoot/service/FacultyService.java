@@ -17,10 +17,7 @@ public class FacultyService {
     private DepartmentRepository departmentRepository;
 
     public void saveFaculty(Faculty f){
-        Department newDepartment=departmentRepository.findById(f.getDepartment()
-                .getId())
-                .get();
-        f.setDepartment(newDepartment);
+
         facultyRepository.save(f);
 
 
@@ -28,6 +25,9 @@ public class FacultyService {
     }
     public List<Faculty>getAllFac(){
         return facultyRepository.findAll();
+    }
+    public void deleteFacultyById(int in){
+        facultyRepository.findById(in).get();
     }
     public Faculty findById(int id){
         return facultyRepository.findById(id).get();

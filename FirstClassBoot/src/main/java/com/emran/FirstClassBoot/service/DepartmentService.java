@@ -1,7 +1,9 @@
 package com.emran.FirstClassBoot.service;
 
 import com.emran.FirstClassBoot.entity.Department;
+import com.emran.FirstClassBoot.entity.Faculty;
 import com.emran.FirstClassBoot.repository.DepartmentRepository;
+import com.emran.FirstClassBoot.repository.FacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,16 @@ public class DepartmentService {
 @Autowired
     private DepartmentRepository departmentRepository;
 
+@Autowired
+private FacultyRepository facultyRepository;
+
+
     public void saveDep(Department d){
+        Faculty faculty=facultyRepository.findById(d.getFaculty().getId())
+                        .orElseThrow(
+                                ()->new RuntimeException("user not found has ID"+d.getFaculty().getId())
+                        );
+        d.setFaculty(faculty);
     departmentRepository.save(d);
     }
 
