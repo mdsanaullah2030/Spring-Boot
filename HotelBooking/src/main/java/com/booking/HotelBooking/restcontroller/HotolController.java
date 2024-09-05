@@ -29,7 +29,17 @@ return new ResponseEntity<>("Hotel Added successful", HttpStatus.OK);
 
 
 
-
+@GetMapping("/")
+    public ResponseEntity<List<Hotel>>getAllHotel(){
+    List<Hotel>hotels=hotelService.getAllHotels();
+    return ResponseEntity.ok(hotels);
+}
+@GetMapping("/{id}")
+    public ResponseEntity<Hotel>findHotelById(@PathVariable int id){
+    try {
+        Hotel hotel=hotelService.findHotelById(id);
+    }
+}
 
 
 }

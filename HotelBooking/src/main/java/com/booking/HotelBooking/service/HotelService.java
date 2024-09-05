@@ -47,6 +47,12 @@ public class HotelService {
 
     }
 
+    public List<Hotel>findHotelsByLocationName(String locationName){
+        return hotelRepositoy.findHotelsByLocationName(locationName);
+
+    }
+
+
     public void deleteHotelBuId(int id) {
         hotelRepositoy.deleteById(id);
     }
