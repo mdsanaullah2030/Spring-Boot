@@ -4,6 +4,7 @@ import com.booking.HotelBooking.entity.Location;
 import com.booking.HotelBooking.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class LocationService {
          return locationRepository.findAll();
 
      }
-  public void saveLocation(Location l){
+  public void saveLocation(Location l, MultipartFile file){
      locationRepository.save(l);
   }
  public void deleteLocation(int id){
