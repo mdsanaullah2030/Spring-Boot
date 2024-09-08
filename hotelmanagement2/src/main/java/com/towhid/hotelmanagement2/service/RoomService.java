@@ -97,7 +97,7 @@ public class RoomService {
         // Save the file
         Files.copy(file.getInputStream(), filePath);
 
-        return filename; // Return the filename for storing in the database
+        return filename;
     }
 
 
