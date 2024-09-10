@@ -34,4 +34,15 @@ public class LocationRestController {
         return new ResponseEntity<>("Location added succesfully with image", HttpStatus.OK);
 
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateLocation(
+            @RequestPart(value = "location") Location location,
+            @RequestParam(value = "image", required = true) MultipartFile file
+    ) throws IOException {
+        locetionService.updateLocation(location, file);
+
+        return new ResponseEntity<>("Location added succesfully with image", HttpStatus.OK);
+
+    }
 }

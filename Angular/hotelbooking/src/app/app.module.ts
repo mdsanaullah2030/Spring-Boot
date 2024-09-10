@@ -26,7 +26,7 @@ import { LoginComponent } from './singIn/login/login.component';
 import { LogoutComponent } from './singIn/logout/logout.component';
 import { RegistrationComponent } from './singIn/registration/registration.component';
 import { UserprofileComponent } from './user/userprofile/userprofile.component';
-import { RoomByHotelComponent } from './hotel/room-by-hotel/room-by-hotel.component';
+
 
 
 @NgModule({
@@ -50,7 +50,7 @@ import { RoomByHotelComponent } from './hotel/room-by-hotel/room-by-hotel.compon
     LogoutComponent,
     RegistrationComponent,
     UserprofileComponent,
-    RoomByHotelComponent
+   
   ],
   imports: [
     BrowserModule,

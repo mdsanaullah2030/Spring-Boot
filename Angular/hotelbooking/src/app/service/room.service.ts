@@ -38,10 +38,16 @@ export class RoomService {
   }
 
 
-  createRoom(room: RoomModel): Observable<any> {
+  createRoom(room: RoomModel, image: File): Observable<RoomModel> {
 
-    return this.httpClient.post(this.baseUrl+"/save", room);
+    const formData = new FormData();
 
+    formData.append('room', new Blob([JSON.stringify(room)], { type: 'application/json' }));
+
+    // Append image file
+    formData.append('image', image);
+
+    return this.httpClient.post<RoomModel>(this.baseUrl + "save", formData);
 
   }
 

@@ -41,6 +41,19 @@ public class LocetionService {
         locationRepository.save(location);
     }
 
+    public void updateLocation(Location location, MultipartFile imageFile) throws IOException {
+
+//        Location location = locationRepository.findById(hotel.getLocation().getId())
+//                .orElseThrow(() -> new RuntimeException("Location with this id not found"));
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String imageFileName = saveImage(imageFile, location);
+            location.setImage(imageFileName);
+        }
+
+        locationRepository.save(location);
+    }
+
     public  void deleteLocation(int id){
         locationRepository.deleteById(id);
     }
