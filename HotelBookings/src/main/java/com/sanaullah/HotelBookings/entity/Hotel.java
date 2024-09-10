@@ -23,6 +23,7 @@ public class Hotel {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "laoctionId")
-    private Location location;
+    private  Location location;
+
 
 }

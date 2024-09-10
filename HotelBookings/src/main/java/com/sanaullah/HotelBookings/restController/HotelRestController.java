@@ -23,11 +23,12 @@ public class HotelRestController {
     @PostMapping("/save")
     public ResponseEntity<String> saveHotel(
             @RequestPart(value = "hotel") Hotel hotel,
-            @RequestParam(value = "image", required = true) MultipartFile file
+            @RequestParam(value = "image", required = true)MultipartFile file
     ) throws IOException {
-        hotelService.saveHotel(hotel, file);
 
-        return new ResponseEntity<>("Hotel added succesfully with image", HttpStatus.OK);
+        hotelService.saveHotel(hotel,file);
+
+        return new ResponseEntity<>("Hotel added successfully with image.", HttpStatus.OK);
 
     }
 
@@ -44,6 +45,7 @@ public class HotelRestController {
         return ResponseEntity.ok(hotels);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Hotel> findHotelById(@PathVariable int id) {
         try {
@@ -53,4 +55,6 @@ public class HotelRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+
 }

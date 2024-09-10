@@ -5,10 +5,10 @@ import com.sanaullah.HotelBookings.entity.Hotel;
 import com.sanaullah.HotelBookings.entity.Location;
 import com.sanaullah.HotelBookings.repository.HotelRepository;
 import com.sanaullah.HotelBookings.repository.LocationRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,88 +18,110 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
+
 @Service
 public class HotelService {
 
     @Autowired
     private HotelRepository hotelRepository;
-
     @Autowired
     private LocationRepository locationRepository;
 
     @Value("src/main/resources/static/images")
-    private String uploadDir;
+    private  String uploadDir;
 
-    public List<Hotel> getAllHotel() {
-        return hotelRepository.findAll();
+
+    public List<Hotel> getAllHotel(){
+
+        return  hotelRepository.findAll();
     }
 
-    public void saveHotel(Hotel hotel, MultipartFile imageFile) throws IOException {
-
-        Location location = locationRepository.findById(hotel.getLocation().getId())
-                .orElseThrow(() -> new RuntimeException("Location with this id not found"));
-
-        if (imageFile != null && !imageFile.isEmpty()) {
-            String imageFileName = saveImage(imageFile, hotel);
-            hotel.setImage(imageFileName);
-        }
-
-        hotelRepository.save(hotel);
-    }
-
-
-    public void deleteHotelById(int id) {
-        hotelRepository.deleteById(id);
-    }
-
-    public Hotel findHotelById(int id) {
-        return hotelRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Hotel With This Id Not Found"));
-    }
 
     @Transactional
-    public void updateHotel(int id, Hotel updateHotel, MultipartFile imageFile) throws IOException {
+    public void saveHotel(Hotel hotel, MultipartFile imageFile) throws IOException {
+
+        Location location=locationRepository.findById(hotel.getLocation().getId())
+                .orElseThrow(()-> new RuntimeException("Location With this Id not Found"));
+
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String imageFilename = saveImage(imageFile, hotel);
+            hotel.setImage(imageFilename); // Set the image filename in the user entity
+        }
+
+
+
+        hotel.setLocation(location);
+        hotelRepository.save(hotel);
+
+    }
+
+
+    public void deleteHotelById(int id){
+
+        hotelRepository.deleteById(id);
+
+    }
+
+    public Hotel findHotelById(int id){
+
+        return  hotelRepository.findById(id)
+                .orElseThrow(
+                        ()->new RuntimeException("Hotel Not found With this ID")
+                );
+    }
+
+
+
+    @Transactional
+    public void updateHotel(int id, Hotel updatedHotel, MultipartFile imageFile) throws IOException {
         Hotel existingHotel = hotelRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Hotel With This Id Not Found"));
+                .orElseThrow(() -> new RuntimeException("Hotel not found with this ID"));
 
-        existingHotel.setName(updateHotel.getName());
-        existingHotel.setAddress(updateHotel.getAddress());
-        existingHotel.setRating(updateHotel.getRating());
-        existingHotel.setMinPrice(updateHotel.getMinPrice());
-        existingHotel.setMaxPrice(updateHotel.getMaxPrice());
+        // Update hotel details
+        existingHotel.setName(updatedHotel.getName());
+        existingHotel.setAddress(updatedHotel.getAddress());
+        existingHotel.setRating(updatedHotel.getRating());
+        existingHotel.setMinPrice(updatedHotel.getMinPrice());
+        existingHotel.setMaxPrice(updatedHotel.getMaxPrice());
 
-        Location location = locationRepository.findById(updateHotel.getLocation().getId())
-                .orElseThrow(() -> new RuntimeException("Location with this id not found"));
+        // Update location
+        Location location = locationRepository.findById(updatedHotel.getLocation().getId())
+                .orElseThrow(() -> new RuntimeException("Location with this ID not found"));
         existingHotel.setLocation(location);
 
+        // Update image if provided
         if (imageFile != null && !imageFile.isEmpty()) {
             String imageFilename = saveImage(imageFile, existingHotel);
             existingHotel.setImage(imageFilename);
         }
+
         hotelRepository.save(existingHotel);
-
     }
 
-    public List<Hotel>findHotelsByLocationName(String locationName){
-        return hotelRepository.finndHotelByLocationName(locationName);
+
+    public List<Hotel> findHotelsByLocationName(String locationName){
+
+        return hotelRepository.findHotelsByLocationName(locationName);
     }
 
-    public String saveImage(MultipartFile file, Hotel h) throws IOException {
-        Path uploadPath = Paths.get(uploadDir + "/hotel");
 
+
+    private String saveImage(MultipartFile file, Hotel h) throws IOException {
+        Path uploadPath = Paths.get(uploadDir+"/hotel");
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        String filename = h.getName() + "_" + UUID.randomUUID().toString();
+        // Generate a unique filename
+        String filename = h.getName()+"_"+UUID.randomUUID().toString() ;
         Path filePath = uploadPath.resolve(filename);
 
+        // Save the file
         Files.copy(file.getInputStream(), filePath);
 
-
-        return filename;
+        return filename; // Return the filename for storing in the database
     }
-
 
 
 
