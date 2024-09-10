@@ -16,19 +16,14 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String name;
-
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
-
     @Column(nullable = false)
-    @Size(max = 20,min = 6)
     private String password;
 
     @Column(unique = true)
-    private  String cell;
-
+    private String cell;
     private String address;
     private Date dob;
     private String gender;
@@ -38,11 +33,12 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user")
-    private List<Token>tokens;
+    private List<Token> tokens;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name())  );
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
@@ -74,4 +70,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
+
