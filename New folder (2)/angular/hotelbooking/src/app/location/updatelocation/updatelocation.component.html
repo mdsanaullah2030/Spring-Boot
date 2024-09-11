@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">
+        <i class="fas fa-edit"></i> Update Location
+    </h2>
+    <form (ngSubmit)="updateLocation()">
+        <img [src]="'http://localhost:8080/images/location/' + location.image" class="card-img-top my-1" alt="{{ location.name }}">
+        
+        <div class="mb-3">
+            <label for="name" class="form-label">
+                <i class="fas fa-map-marker-alt"></i> Name
+            </label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="location.name" placeholder="Enter location name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">
+                <i class="fas fa-image"></i> Image
+            </label>
+            <input type="file" class="form-control" id="image" (change)="onImageSelected($event)">
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Update Location
+        </button>
+    </form>
+</div>
