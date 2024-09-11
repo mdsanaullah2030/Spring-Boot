@@ -13,41 +13,36 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './updatehotel.component.css'
 })
 export class UpdatehotelComponent implements OnInit{
-  location: LocationModel[] = [];
-  hotels:HotelModel = new HotelModel()
-
-  id: string = "";
+  locations: LocationModel[] = [];
+  hotel: HotelModel = new HotelModel();
   selectedImage?: File;
+  id: string = '';
 
   constructor(
+    private hotelService: HotelService,
     private locationService: LocationService,
-    private hotelService:HotelService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params['id']; 
     this.hotelService.getHotelById(this.id).subscribe({
       next: (res) => {
-        console.log(res);
-        this.hotels = res;
+        this.hotel = res;
+        console.log(this.hotel);
       },
-      error: (error) => {
-        console.log(error);
+      error: (err) => {
+        console.error(err);
       }
     });
-    this.loadLocation();
-    this.updateHotel();
+    this.loadLocations();
   }
 
-  
-  
-
-  loadLocation(): void {
+  loadLocations(): void {
     this.locationService.getAllLocationforHotel().subscribe({
       next: (res: LocationModel[]) => {
-        this.location= res;
+        this.locations = res;
       },
       error: (err) => {
         console.error(err);
@@ -59,14 +54,13 @@ export class UpdatehotelComponent implements OnInit{
     this.selectedImage = event.target.files[0];
   }
 
-  updateHotel() {
-    this.hotelService.updateHotel(this.id, this.hotels, this.selectedImage).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.router.navigate(['/hotel']);
+  updateHotel(): void {
+    this.hotelService.updateHotel(this.id, this.hotel, this.selectedImage).subscribe({
+      next: () => {
+        this.router.navigate(['/hotel']); 
       },
-      error: (error) => {
-        console.log(error);
+      error: (err) => {
+        console.error(err);
       }
     });
   }

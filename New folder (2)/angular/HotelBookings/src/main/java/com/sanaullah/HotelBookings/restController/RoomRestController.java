@@ -1,5 +1,6 @@
 package com.sanaullah.HotelBookings.restController;
 
+import com.sanaullah.HotelBookings.entity.Hotel;
 import com.sanaullah.HotelBookings.entity.Location;
 import com.sanaullah.HotelBookings.entity.Room;
 import com.sanaullah.HotelBookings.service.RoomService;
@@ -62,5 +63,21 @@ public class RoomRestController {
         return ResponseEntity.ok(rooms);
     }
 
+
+
+
+    @PutMapping("/updateroom/{id}")
+    public ResponseEntity<String> updateRoom(
+            @PathVariable int id,
+            @RequestPart("room") Room room,
+            @RequestParam(value = "image", required = false) MultipartFile file
+    ) throws IOException {
+        try {
+            roomService.updateRoom(id, room, file);
+            return ResponseEntity.ok("Hotel updated successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hotel not found with this ID");
+        }
+    }
 
 }

@@ -34,6 +34,11 @@ public class RoomService {
         return roomRepository.findAll();
 
     }
+    public Room getRoomById(int id){
+
+        return roomRepository.findById(id).orElse(new Room());
+    }
+
 
 
     @Transactional
@@ -100,6 +105,34 @@ public class RoomService {
     }
 
 
+    @Transactional
+    public void updateRoom(int id, Room updatedRoom, MultipartFile imageFile) throws IOException {
+        // Fetch the existing room
+        Room existingRoom = roomRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Room not found with this ID"));
+
+        // Update room details
+        existingRoom.setRoomType(updatedRoom.getRoomType());
+        existingRoom.setPrice(updatedRoom.getPrice());
+        existingRoom.setAdultNo(updatedRoom.getAdultNo());
+        existingRoom.setChildNo(updatedRoom.getChildNo());
+        existingRoom.setArea(updatedRoom.getArea());
+        existingRoom.setAvilability(updatedRoom.isAvilability());
+
+        // Update the hotel association
+        Hotel hotel = hotelRepository.findById(updatedRoom.getHotel().getId())
+                .orElseThrow(() -> new RuntimeException("Hotel with this ID not found"));
+        existingRoom.setHotel(hotel);
+
+        // Update image if a new one is provided
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String imageFilename = saveImage(imageFile, existingRoom);
+            existingRoom.setImage(imageFilename);
+        }
+
+        // Save the updated room
+        roomRepository.save(existingRoom);
+    }
 
 
 

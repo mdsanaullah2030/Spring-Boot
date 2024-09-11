@@ -40,6 +40,12 @@ public class HotelRestController {
         return ResponseEntity.ok(hotels);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Hotel> getHotelById(@PathVariable int id) {
+        Hotel hotel = hotelService.getHotelById(id);
+        return ResponseEntity.ok(hotel);
+    }
+
     @GetMapping("/h/searchhotel")
     public ResponseEntity<List<Hotel>> findHotelsByLocationName(@RequestParam(value = "locationName") String locationName) {
         List<Hotel> hotels = hotelService.findHotelsByLocationName(locationName);

@@ -56,11 +56,20 @@ export class RoomService {
     
   }
 
-  updateRoom(id: string, room: RoomModel): Observable<any> {
 
-    return this.httpClient.put(this.baseUrl + "/" + id, room);
+  updateRoom(id: string, room: RoomModel, image?: File): Observable<any> {
+    const formData = new FormData();
 
-  }
+   
+    formData.append('room', new Blob([JSON.stringify(room)], { type: 'application/json' }));
+
+
+    if (image) {
+        formData.append('image', image);
+    }
+
+    return this.httpClient.put(this.baseUrl + 'updateroom/' + id, formData);
+}
 
   getById(id: string): Observable<any> {
 

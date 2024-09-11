@@ -17,7 +17,8 @@ export class ViewroomComponent {
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
-    private hotelService: HotelService
+    private hotelService: HotelService,
+    private router: Router
   ) {
     this.hotelId = this.route.snapshot.paramMap.get('hotelId') || '';  // Get hotel ID from route parameters
   }
@@ -55,7 +56,10 @@ export class ViewroomComponent {
     });
   }
 
+  updateRoom(id: string) {
+    this.router.navigate(['/updateroom',id]);
 
+  }
 
   }
 

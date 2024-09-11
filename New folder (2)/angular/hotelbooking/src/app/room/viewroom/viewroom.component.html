@@ -39,6 +39,9 @@
               <p class="card-text">Children: {{ room.childNo }}</p>
               <p class="card-text">Price: BDT {{ room.price }}</p>
               <p class="card-text">Availability: {{ room.availability ? 'Available' : 'Not Available' }}</p>
+              <button (click)="updateRoom(room.id)" class="btn btn-danger">
+                Edit 
+              </button>
               <a href="" class="btn btn-primary">Book Now</a>
             </div>
           </div>

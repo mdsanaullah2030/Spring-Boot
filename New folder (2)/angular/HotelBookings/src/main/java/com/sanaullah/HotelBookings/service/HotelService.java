@@ -37,6 +37,11 @@ public class HotelService {
         return  hotelRepository.findAll();
     }
 
+    public Hotel getHotelById(int id){
+
+        return hotelRepository.findById(id).orElse(new Hotel());
+    }
+
 
     @Transactional
     public void saveHotel(Hotel hotel, MultipartFile imageFile) throws IOException {

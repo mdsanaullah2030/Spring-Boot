@@ -1,7 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { HotelModel } from '../model/hotel.model';
 
 
@@ -62,7 +62,18 @@ export class HotelService {
 }
 
 
+getAllHotelforRoom():Observable<HotelModel[]>{
+  return this.httpClient.get<HotelModel[]>(this.baseUrl)
+    .pipe(
+      catchError(this.handleError)
+    )
 
+}
+
+private handleError(error: any) {
+  console.error('An error occurred:', error);
+  return throwError(() => new Error('test'));
+}
 
   }
 
