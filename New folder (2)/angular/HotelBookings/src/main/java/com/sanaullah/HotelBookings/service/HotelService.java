@@ -114,32 +114,29 @@ public class HotelService {
             Files.createDirectories(uploadPath);
         }
 
-        // Generate a unique filename
+
         String filename = h.getName()+"_"+UUID.randomUUID().toString() ;
         Path filePath = uploadPath.resolve(filename);
 
-        // Save the file
+
         Files.copy(file.getInputStream(), filePath);
 
-        return filename; // Return the filename for storing in the database
+        return filename;
     }
 
 
 
 
-    public  void deleteById(int id){
-        HotelRepository.deleteById(id);
-    }
+
 
     public void updateHotel(Hotel hotel) {
-        HotelRepository.save(hotel);
+        hotelRepository.save(hotel);
     }
 
 
     public  Hotel findById(int id){
-        return   HotelRepository.findById(id)
+        return   hotelRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Location Not Found by this Id"));
     }
-
 
 }

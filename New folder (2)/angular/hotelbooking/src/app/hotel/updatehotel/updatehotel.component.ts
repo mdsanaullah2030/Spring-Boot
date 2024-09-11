@@ -1,10 +1,10 @@
-import { Component,} from '@angular/core';
+import { Component, OnInit,} from '@angular/core';
 import { HotelModel } from '../../model/hotel.model';
-import { LocationModel } from '../../model/location.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { LocationService } from '../../service/location.service';
+import { LocationModel } from '../../model/location.model';
 import { HotelService } from '../../service/hotel.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 @Component({
@@ -12,43 +12,42 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './updatehotel.component.html',
   styleUrl: './updatehotel.component.css'
 })
-export class UpdatehotelComponent implements OnInit {
-  hotel: HotelModel = new HotelModel();
-  locations: LocationModel[] = [];
-  hoteleId: string = "";
-  hotelForm!: FormGroup;
+export class UpdatehotelComponent implements OnInit{
+  location: LocationModel[] = [];
+  hotels:HotelModel = new HotelModel()
 
+  id: string = "";
+  selectedImage?: File;
 
   constructor(
     private locationService: LocationService,
-    private hotelService: HotelService,
-    private formBuilder: FormBuilder, 
+    private hotelService:HotelService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
-
   ngOnInit(): void {
-    this.hoteleId = this.route.snapshot.params['id'];
-    this.hotelForm = this.formBuilder.group({
-      image: [''],
-      hotelname: [''],
-      address : [''],
-      rating: [''],
-      location: this.formBuilder.group({
-        id: [undefined],
-        locationname: [undefined]
-      })
+    this.id = this.route.snapshot.params['id'];
+    this.hotelService.getHotelById(this.id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.hotels = res;
+      },
+      error: (error) => {
+        console.log(error);
+      }
     });
-
     this.loadLocation();
-    this.loadHotelDetails();
+    this.updateHotel();
   }
+
+  
+  
 
   loadLocation(): void {
     this.locationService.getAllLocationforHotel().subscribe({
       next: (res: LocationModel[]) => {
-        this.locations = res;
+        this.location= res;
       },
       error: (err) => {
         console.error(err);
@@ -56,39 +55,18 @@ export class UpdatehotelComponent implements OnInit {
     });
   }
 
-  loadHotelDetails(): void {
-    this.hotelService.getHotelById(this.hoteleId).subscribe({
-      next: (hotel: HotelModel) => {
-        this.hotel = hotel; 
-        this.hotelForm.patchValue({
-          image: hotel.image,
-          hotelname: hotel.name,
-          address: hotel.address,
-          rating: hotel.rating,
-          rating: hotel.minPrice,
-          rating: hotel.maxPrice,
-          location: hotel.location
-        });
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
+  onImageSelected(event: any): void {
+    this.selectedImage = event.target.files[0];
   }
 
-  updateHotel(): void {
-    const updatedHotel: HotelModel = {
-      ...this.hotel,
-      ...this.hotelForm.value
-    };
-
-    this.hotelService.updateHotel(updatedHotel).subscribe({
-      next: () => {
-        this.hotelForm.reset();
-        this.router.navigate(['/hotelview']);
+  updateHotel() {
+    this.hotelService.updateHotel(this.id, this.hotels, this.selectedImage).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.router.navigate(['/hotel']);
       },
-      error: (err) => {
-        console.error('Error updating hotel:', err);
+      error: (error) => {
+        console.log(error);
       }
     });
   }
@@ -96,3 +74,15 @@ export class UpdatehotelComponent implements OnInit {
 
 
 
+
+
+
+
+
+
+
+
+ 
+
+
+ 

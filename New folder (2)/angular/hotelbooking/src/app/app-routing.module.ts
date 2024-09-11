@@ -16,6 +16,7 @@ import { UserprofileComponent } from './user/userprofile/userprofile.component';
 import { ViewroomComponent } from './room/viewroom/viewroom.component';
 import { CreateroomComponent } from './room/createroom/createroom.component';
 import { UpdatelocationComponent } from './location/updatelocation/updatelocation.component';
+import { UpdateroomComponent } from './room/updateroom/updateroom.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path:'update/:id',component:UpdatelocationComponent},
   {path:'hotel',component:ViewhotelComponent},
   {path:'createhotel',component:CreatehotelComponent},
+  {path:'updatehotel/:id',component:UpdateroomComponent},
   {path:'room/:hotelId',component:ViewroomComponent},
   {path:'createroom',component:CreateroomComponent},
   {path:'reg',component:RegistrationComponent},

@@ -47,42 +47,23 @@ public class HotelRestController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Hotel> findHotelById(@PathVariable int id) {
-        try {
-            Hotel hotel = hotelService.findHotelById(id);
-            return ResponseEntity.ok(hotel);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-    }
-
-    @DeleteMapping("/deletehotel/{id}")
-    public void deleteById(@PathVariable int id) {
-        hotelService.deleteById(id);
-    }
-
-
-    @PutMapping("/update/{id}")
+    @PutMapping("/updatehotel/{id}")
     public ResponseEntity<String> updateHotel(
             @PathVariable int id,
-            @RequestPart(value = "location") Hotel hotel,
+            @RequestPart("hotel") Hotel hotel,
             @RequestParam(value = "image", required = false) MultipartFile file
     ) throws IOException {
-        Hotel existingHotel = hotelService.findById(id);
-
-
-        existingHotel.setName(hotel.getName());
-
-
-        if (file != null && !file.isEmpty()) {
-            String imageFileName = hotelService.saveImage(file, hotel);
-            existingHotel.setImage(imageFileName);
+        try {
+            hotelService.updateHotel(id, hotel, file);
+            return ResponseEntity.ok("Hotel updated successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hotel not found with this ID");
         }
-
-        hotelService.updateHotel(existingHotel);
-        return new ResponseEntity<>("Location updated successfully", HttpStatus.OK);
     }
 
-
 }
+
+
+
+
+

@@ -15,7 +15,9 @@
                     <p class="card-text">Location: {{ h.location.name}}</p>
 
 
-
+                    <button (click)="updateHotel(h.id)" class="btn btn-danger">
+                        Edit 
+                      </button>
                     <button class="btn btn-primary btn-sm" (click)="viewRooms(h.id)">View</button>
                     <!-- <button class="btn btn-danger btn-sm">Delete</button> -->
                 </div>

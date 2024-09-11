@@ -56,9 +56,13 @@ export class ViewhotelComponent {
  
     this.router.navigate(['/room', hotelId]);
   }
+  updateHotel(id: string) {
+    this.router.navigate(['/updatehotel',id]);
 
+  }
 
   }
 
 
 
+ 

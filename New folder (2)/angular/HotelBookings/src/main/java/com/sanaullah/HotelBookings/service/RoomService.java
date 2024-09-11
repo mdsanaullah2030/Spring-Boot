@@ -102,19 +102,6 @@ public class RoomService {
 
 
 
-    public  void deleteById(int id){
-        RoomRepository.deleteById(id);
-    }
-
-    public void updateRoom(Room room) {
-        RoomRepository.save(room);
-    }
-
-
-    public  Room findById(int id){
-        return   RoomRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Location Not Found by this Id"));
-    }
 
 
 }

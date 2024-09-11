@@ -63,30 +63,4 @@ public class RoomRestController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteHotel(@PathVariable int id) {
-        locetionService.deleteById(id);
-    }
-
-
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateLocation(
-            @PathVariable int id,
-            @RequestPart(value = "location") Location location,
-            @RequestParam(value = "image", required = false) MultipartFile file
-    ) throws IOException {
-        Location existingLocation = locetionService.findById(id);
-
-
-        existingLocation.setName(location.getName());
-
-
-        if (file != null && !file.isEmpty()) {
-            String imageFileName = locetionService.saveImage(file, location);
-            existingLocation.setImage(imageFileName);
-        }
-
-        locetionService.updateLocation(existingLocation);
-        return new ResponseEntity<>("Location updated successfully", HttpStatus.OK);
-    }
 }
