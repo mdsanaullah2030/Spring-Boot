@@ -1,5 +1,6 @@
 package com.towhid.hotelmanagement2.service;
 
+import com.towhid.hotelmanagement2.entity.AuthenticationResponse;
 import com.towhid.hotelmanagement2.entity.Token;
 import com.towhid.hotelmanagement2.entity.User;
 import com.towhid.hotelmanagement2.jwt.JwtService;

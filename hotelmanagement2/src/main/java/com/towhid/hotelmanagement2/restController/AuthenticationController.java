@@ -1,5 +1,6 @@
 package com.towhid.hotelmanagement2.restController;
 
+import com.towhid.hotelmanagement2.entity.AuthenticationResponse;
 import com.towhid.hotelmanagement2.entity.User;
 import com.towhid.hotelmanagement2.service.AuthService;
 import lombok.AllArgsConstructor;

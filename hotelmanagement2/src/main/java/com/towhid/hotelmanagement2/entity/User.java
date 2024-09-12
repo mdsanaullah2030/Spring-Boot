@@ -1,7 +1,10 @@
 package com.towhid.hotelmanagement2.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,9 +13,14 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
+
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -70,6 +78,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }
 
