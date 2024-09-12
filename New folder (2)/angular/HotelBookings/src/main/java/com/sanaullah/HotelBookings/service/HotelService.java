@@ -3,7 +3,7 @@ package com.sanaullah.HotelBookings.service;
 
 import com.sanaullah.HotelBookings.entity.Hotel;
 import com.sanaullah.HotelBookings.entity.Location;
-import com.sanaullah.HotelBookings.entity.Room;
+
 import com.sanaullah.HotelBookings.repository.HotelRepository;
 import com.sanaullah.HotelBookings.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;

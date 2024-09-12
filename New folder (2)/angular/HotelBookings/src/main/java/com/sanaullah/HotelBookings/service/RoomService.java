@@ -62,6 +62,7 @@ public class RoomService {
     }
 
     public void deleteRoom(int id) {
+
         roomRepository.deleteById(id);
     }
 
