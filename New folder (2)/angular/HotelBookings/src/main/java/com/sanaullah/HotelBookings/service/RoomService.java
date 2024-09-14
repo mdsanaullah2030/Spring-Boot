@@ -47,7 +47,7 @@ public class RoomService {
         Hotel hotel = hotelRepository.findById(room.getHotel().getId())
                 .orElseThrow(() -> new RuntimeException("Hotel With this Id not Found"));
 
-        System.out.println("Hotel "+hotel.toString());
+
 
         if (imageFile != null && !imageFile.isEmpty()) {
             String imageFilename = saveImage(imageFile, room);
@@ -133,6 +133,10 @@ public class RoomService {
 
         // Save the updated room
         roomRepository.save(existingRoom);
+    }
+
+    public void updateRoom(Room room) {
+        roomRepository.save(room);
     }
 
 
