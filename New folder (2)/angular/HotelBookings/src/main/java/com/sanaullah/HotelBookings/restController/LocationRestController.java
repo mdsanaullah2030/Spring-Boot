@@ -34,7 +34,11 @@ public class LocationRestController {
         return new ResponseEntity<>("Location added succesfully with image", HttpStatus.OK);
 
     }
-
+    @GetMapping("/h/searchLocatiom")
+    public ResponseEntity<List<Location>>findLocationName(@RequestParam(value ="categoryName" )String categoryName){
+        List<Location> location=locetionService.findLocationName(categoryName);
+        return ResponseEntity.ok(location);
+    }
 
     @DeleteMapping("/delete/{id}")
     public void deleteLocation(@PathVariable int id) {

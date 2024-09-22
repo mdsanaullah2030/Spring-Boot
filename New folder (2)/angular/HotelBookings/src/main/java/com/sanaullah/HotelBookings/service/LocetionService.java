@@ -2,6 +2,7 @@ package com.sanaullah.HotelBookings.service;
 
 import com.sanaullah.HotelBookings.entity.Location;
 import com.sanaullah.HotelBookings.repository.LocationRepository;
+import com.sanaullah.HotelBookings.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import java.util.UUID;
 public class LocetionService {
     @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private RoomRepository roomRepository;
 
     @Value("src/main/resources/static/images")
     private String uploadDir;
@@ -27,6 +30,8 @@ public class LocetionService {
         return locationRepository.findAll();
 
     }
+
+
 
     public void saveLocation(Location location, MultipartFile imageFile) throws IOException {
 
