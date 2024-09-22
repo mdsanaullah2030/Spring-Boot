@@ -55,6 +55,10 @@ export class ViewlocationComponent {
       this.filteredLocations = [...this.locations];
     }
   }
+
+  viewHotels(locationId: string): void {
+    this.router.navigate(['/hotel', locationId]); // Navigate to the ViewhotelComponent
+  }
 }
 
 

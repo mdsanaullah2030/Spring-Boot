@@ -66,6 +66,20 @@ export class HotelService {
   }
 
 
+  getHotelsByLocation(locationId: string): Observable<HotelModel[]> {
+    return this.httpClient.get<HotelModel[]>(this.baseUrl + "h/searchhotelid?locationid=" + locationId)
+      .pipe(catchError(this.handleError));
+  }
+  
+
+  
+  private handleError(error: any) {
+    console.error('An error occurred:', error);
+    return throwError(() => new Error('test'));
+  }
+
+
+
   getAllHotelforRoom(): Observable<HotelModel[]> {
     return this.httpClient.get<HotelModel[]>(this.baseUrl)
       .pipe(
@@ -73,13 +87,21 @@ export class HotelService {
       )
 
   }
-
-  private handleError(error: any) {
-    console.error('An error occurred:', error);
-    return throwError(() => new Error('test'));
-  }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
