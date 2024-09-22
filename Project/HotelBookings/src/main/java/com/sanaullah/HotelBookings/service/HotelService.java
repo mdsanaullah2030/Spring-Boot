@@ -91,9 +91,17 @@ public class HotelService {
     }
 
 
+
+    //hotel to room serarch id Name//
     public List<Hotel> findHotelsByLocationName(String locationName){
 
         return hotelRepository.findHotelsByLocationName(locationName);
+    }
+    //hotel to room serarch id Use//
+    public List<Hotel> findHotelsByLocationId(int locationid) {
+
+        return hotelRepository.findHotelsByLocationId(locationid);
+
     }
 
 

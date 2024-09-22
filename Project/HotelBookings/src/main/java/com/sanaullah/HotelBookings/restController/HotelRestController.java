@@ -52,6 +52,15 @@ public class HotelRestController {
         return ResponseEntity.ok(hotels);
     }
 
+    //hotel to room serarch id Use//
+    @GetMapping("/h/searchhotelid")
+    public ResponseEntity<List<Hotel>> findHotelsByLocationId(@RequestParam("locationid") int locationId) {
+        List<Hotel> hotels = hotelService.findHotelsByLocationId(locationId);
+        return ResponseEntity.ok(hotels);
+    }
+
+
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteHotel(@PathVariable int id) {
         try {
