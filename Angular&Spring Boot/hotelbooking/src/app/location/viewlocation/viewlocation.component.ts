@@ -1,7 +1,6 @@
 import { Component, } from '@angular/core';
 import { LocationService } from '../../service/location.service';
 import { Router } from '@angular/router';
-import { HotelService } from '../../service/hotel.service';
 
 
 @Component({
@@ -18,8 +17,7 @@ export class ViewlocationComponent {
 
   constructor(
     private locationService: LocationService,
-    private router: Router,
-    private hotelService: HotelService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {

@@ -40,7 +40,7 @@ public class RoomRestController {
     }
 
 
-    //Singel Room Show Room number(id) show hotel//
+
     @GetMapping("/{id}")
     public ResponseEntity<Room> findRoomById(@PathVariable int id) {
         try {
@@ -51,15 +51,12 @@ public class RoomRestController {
         }
     }
 
-    //hotel to room serarch name Use//
+
     @GetMapping("/r/searchroom")
     public ResponseEntity<List<Room>> findRoomByHotelName(@RequestParam("hotelName")String hotelName) {
         List<Room> rooms = roomService.findRoomByHotelName(hotelName);
         return ResponseEntity.ok(rooms);
     }
-
-
-    //hotel to room serarch id Use//
     @GetMapping("/r/searchroombyid")
     public ResponseEntity<List<Room>> findRoomByHotelId(@RequestParam("hotelid") int hotelid) {
         List<Room> rooms = roomService.findRoomByHotelId(hotelid);

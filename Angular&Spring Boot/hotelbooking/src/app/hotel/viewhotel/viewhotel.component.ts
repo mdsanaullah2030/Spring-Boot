@@ -1,7 +1,7 @@
 import { Component,} from '@angular/core';
 import { HotelService } from '../../service/hotel.service';
 import { LocationService } from '../../service/location.service';
-
+import { RoomService } from '../../service/room.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './viewhotel.component.css'
 })
 export class ViewhotelComponent {
+
   locationId: string;
   location: any;
   hotels: any[] = [];

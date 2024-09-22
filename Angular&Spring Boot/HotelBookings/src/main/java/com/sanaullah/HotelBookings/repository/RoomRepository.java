@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room,Integer> {
-//hotel to room//
+
     @Query("Select r from Room r Where r.hotel.name= :hotelName")
     public List<Room> findRoomByHotelName(@Param("hotelName") String hotelName);
 
@@ -18,7 +18,7 @@ public interface RoomRepository extends JpaRepository<Room,Integer> {
     public List<Room> findRoomByHotelId(@Param("hotelid") int hotelid);
 
 
-    //delete pat//
+
     public List<Room> findAllByHotelId(int hotelId);
 
     public List<Room> deleteAllByHotelId(int hotelId);

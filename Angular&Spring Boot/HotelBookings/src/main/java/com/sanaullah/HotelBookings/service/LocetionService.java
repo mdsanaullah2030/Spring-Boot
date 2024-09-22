@@ -123,7 +123,7 @@ public class LocetionService {
 
 
 
-//serche//
+
     public List<Location> findLocationName(String locationName){
         return locationRepository.findLocationName(locationName);
     }

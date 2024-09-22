@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Integer> {
 
-
-    //serche//
     @Query("SELECT l FROM Location l WHERE l.name = :locationName")
     List<Location> findLocationName(@Param("locationName") String locationName);
 
