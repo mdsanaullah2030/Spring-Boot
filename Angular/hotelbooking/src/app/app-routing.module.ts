@@ -15,6 +15,9 @@ import { LogoutComponent } from './singIn/logout/logout.component';
 import { UserprofileComponent } from './user/userprofile/userprofile.component';
 import { ViewroomComponent } from './room/viewroom/viewroom.component';
 import { CreateroomComponent } from './room/createroom/createroom.component';
+import { UpdatelocationComponent } from './location/updatelocation/updatelocation.component';
+import { UpdateroomComponent } from './room/updateroom/updateroom.component';
+import { UpdatehotelComponent } from './hotel/updatehotel/updatehotel.component';
 
 
 const routes: Routes = [
@@ -25,15 +28,18 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'location',component:ViewlocationComponent},
   {path:'creat',component:CreatelocationComponent},
-  {path:'hotel',component:ViewhotelComponent},
+  {path:'update/:id',component:UpdatelocationComponent},
+  {path:'hotel/:locationid',component:ViewhotelComponent},
   {path:'createhotel',component:CreatehotelComponent},
+  {path:'updatehotel/:id',component:UpdatehotelComponent},
   {path:'room/:hotelId',component:ViewroomComponent},
   {path:'createroom',component:CreateroomComponent},
+  {path:'updateroom/:id',component:UpdateroomComponent},
   {path:'reg',component:RegistrationComponent},
   {path:'login',component:LoginComponent},
   {path:'logout',component:LogoutComponent},
-  {path: 'userprofile', component:UserprofileComponent, canActivate:[AuthGuard]},
-  {path:'**',redirectTo:'login',pathMatch:'full'},
+  {path: 'userprofile', component:UserprofileComponent},
+  
  
 ];
 

@@ -1,7 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { HotelModel } from '../model/hotel.model';
 
 
@@ -41,11 +41,43 @@ export class HotelService {
 
 
 
+  deleteHotel(id: number) {
+    return this.httpClient.delete(`${this.baseUrl}delete/${id}`, { responseType: 'text' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
 
 
 
+  updateHotel(id: string, hotel: HotelModel, image?: File): Observable<any> {
+    const formData = new FormData();
+
+
+    formData.append('hotel', new Blob([JSON.stringify(hotel)], { type: 'application/json' }));
+
+
+    if (image) {
+      formData.append('image', image);
+    }
+
+    return this.httpClient.put(this.baseUrl + 'updatehotel/' + id, formData);
+  }
+
+
+  getHotelsByLocation(locationId: string): Observable<HotelModel[]> {
+    return this.httpClient.get<HotelModel[]>(this.baseUrl + "h/searchhotelid?locationid=" + locationId)
+      .pipe(catchError(this.handleError));
+  }
+  
+
+  private handleError(error: any) {
+    console.error('An error occurred:', error);
+    return throwError(() => new Error('test'));
+  }
+
+}
 
 
 
@@ -53,7 +85,10 @@ export class HotelService {
 
 
 
- 
 
 
- 
+
+
+
+
+
