@@ -32,8 +32,8 @@ export class ViewhotelComponent {
 
   loadLocations() {
 
-    this.locations = this.locationService.getAllLocation();
-    this.hotelService.getAllHotel().subscribe({
+    this.locations = this.locationService.getAllLocationforHotel();
+    this.hotelService.getAllHotelforRoom().subscribe({
 
       next: res => {
         this.hotels = res;
@@ -62,7 +62,7 @@ export class ViewhotelComponent {
     this.router.navigate(['/updatehotel',id]);
 
   }
-  deleteHotel(id: number): void {
+  deleteHotel(id: string): void {
     if (confirm('Are you sure you want to delete this hotel?')) {
       this.hotelService.deleteHotel(id).subscribe({
         next: () => {

@@ -55,12 +55,12 @@ export class ViewroomComponent {
       }
     });
   }
+  
 
   updateRoom(id: string) {
     this.router.navigate(['/updateroom', id]);
 
   }
-
 }
 
 

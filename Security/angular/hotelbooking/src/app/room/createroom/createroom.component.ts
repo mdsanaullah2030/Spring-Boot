@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HotelService } from '../../service/hotel.service';
 import { Router } from '@angular/router';
 import { RoomService } from '../../service/room.service';
+import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class CreateroomComponent {
     private hotelService: HotelService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private roomService:RoomService 
+    private roomService:RoomService ,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +63,7 @@ export class CreateroomComponent {
   }
 
   loadHotels() {  
-    this.hotelService.getAllHotel().subscribe({
+    this.hotelService.getAllHotelforRoom().subscribe({
       next: res => {
         this.hotels = res;
         console.log(this.hotels);
