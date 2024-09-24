@@ -1,0 +1,22 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100 mt-3">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Total Price</th>
+                <th>Hotel Name</th>
+                <th>Room Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of bookings">
+                <td>{{ booking.checkindate | date }}</td>
+                <td>{{ booking.checkoutdate | date }}</td>
+                <td>{{ booking.totalprice | currency }}</td>
+                <td>{{ booking.room.hotel.name }}</td> <!-- Updated to use the correct property -->
+                <td>{{ booking.room.roomType }}</td> <!-- Updated to use the correct property -->
+            </tr>
+        </tbody>
+    </table>
+</div>

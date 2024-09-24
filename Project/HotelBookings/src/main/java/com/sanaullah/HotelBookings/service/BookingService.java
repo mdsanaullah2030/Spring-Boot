@@ -56,5 +56,8 @@ public class BookingService {
         booking.setHotel(hotel);
 
         bookingRepository.save(booking);
+
+
+
     }
 }

@@ -18,29 +18,33 @@ import { CreateroomComponent } from './room/createroom/createroom.component';
 import { UpdatelocationComponent } from './location/updatelocation/updatelocation.component';
 import { UpdateroomComponent } from './room/updateroom/updateroom.component';
 import { UpdatehotelComponent } from './hotel/updatehotel/updatehotel.component';
+import { ViewbookingComponent } from './booking/viewbooking/viewbooking.component';
+import { CreatebookingComponent } from './booking/createbooking/createbooking.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  
-  
-  {path:'about',component:AboutComponent},
-  {path:'home',component:HomeComponent},
-  {path:'location',component:ViewlocationComponent},
-  {path:'creat',component:CreatelocationComponent},
-  {path:'update/:id',component:UpdatelocationComponent},
-  {path:'hotel/:locationId',component:ViewhotelComponent},
-  {path:'createhotel',component:CreatehotelComponent},
-  {path:'updatehotel/:id',component:UpdatehotelComponent},
-  {path:'room/:hotelId',component:ViewroomComponent},
-  {path:'createroom',component:CreateroomComponent},
-  {path:'updateroom/:id',component:UpdateroomComponent},
-  {path:'reg',component:RegistrationComponent},
-  {path:'login',component:LoginComponent},
-  {path:'logout',component:LogoutComponent},
-  {path: 'userprofile', component:UserprofileComponent},
-  
- 
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+
+  { path: 'about', component: AboutComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'location', component: ViewlocationComponent },
+  { path: 'creat', component: CreatelocationComponent },
+  { path: 'update/:id', component: UpdatelocationComponent },
+  { path: 'hotel/:locationId', component: ViewhotelComponent },
+  { path: 'createhotel', component: CreatehotelComponent },
+  { path: 'updatehotel/:id', component: UpdatehotelComponent },
+  { path: 'room/:hotelId', component: ViewroomComponent },
+  { path: 'createroom', component: CreateroomComponent },
+  { path: 'updateroom/:id', component: UpdateroomComponent },
+  { path: 'booking', component: ViewbookingComponent },
+  {path:'bookingcreat',component:CreatebookingComponent},
+  { path: 'reg', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'userprofile', component: UserprofileComponent },
+
+
 ];
 
 @NgModule({

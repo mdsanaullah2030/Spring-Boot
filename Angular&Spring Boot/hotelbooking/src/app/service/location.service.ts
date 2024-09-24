@@ -13,7 +13,25 @@ export class LocationService {
 
   baseUrl: string = "http://localhost:8080/api/location/"
 
+
+  
+  private checkindate: Date | null = null;
+  private checkoutdate: Date | null = null;
+
+
+
   constructor(private httpClient: HttpClient) { }
+
+
+  getCheckinDate(): Date | null {
+    return this.checkindate;
+  }
+
+
+  getCheckoutDate(): Date | null {
+    return this.checkoutdate;
+  }
+
 
 
   getAllLocation(): Observable<any> {
@@ -80,4 +98,6 @@ findLocationName(locationName: string): Observable<LocationModel[]> {
   // Correctly append the endpoint to baseUrl
   return this.httpClient.get<LocationModel[]>(`${this.baseUrl}findLocationName`, { params });
 }
+
+
 }
