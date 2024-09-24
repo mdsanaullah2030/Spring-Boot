@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 @RestController
 @RequestMapping("/api/room")
-@CrossOrigin("*")
+
 public class RoomRestController {
 
     @Autowired

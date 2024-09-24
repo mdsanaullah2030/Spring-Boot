@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class AuthenticationController {
 
     private final AuthService authService;
@@ -49,5 +49,6 @@ public class AuthenticationController {
         String response = authService.activateUser(id);
         return ResponseEntity.ok(response);
     }
+
 
 }

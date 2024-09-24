@@ -25,7 +25,7 @@ export class ViewlocationComponent {
   }
 
   loadLocations() {
-    this.locationService.getAllLocation().subscribe({
+    this.locationService.getAllLocationforHotel().subscribe({
       next: (data) => {
         this.locations = data;
         this.filteredLocations = [...this.locations];

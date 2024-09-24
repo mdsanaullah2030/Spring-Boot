@@ -40,7 +40,7 @@ export class UpdatelocationComponent  implements OnInit{
 
   // Update the location by submitting the form
   updateLocation() {
-    this.locationService.updateLocation(this.id, this.location, this.selectedImage).subscribe({
+    this.locationService.updateLocation(this.id, this.location).subscribe({
       next: (res) => {
         this.router.navigate(['/location']);
       },

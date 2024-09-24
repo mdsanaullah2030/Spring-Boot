@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor;
 import java.sql.Date;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Booking {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,12 +20,13 @@ public class Booking {
     private Date checkoutdate;
     private int totalprice;
 
-@ManyToOne(fetch = FetchType.EAGER)
-@JoinColumn(name="roomId")
-    private Room room;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hotelId")
+    private Hotel hotel;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="hotelId")
-private Hotel hotel;
+    @JoinColumn(name = "roomId")
+    private Room room;
 
 }
