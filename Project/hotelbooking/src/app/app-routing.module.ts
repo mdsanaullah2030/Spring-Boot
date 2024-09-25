@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'createroom', component: CreateroomComponent },
   { path: 'updateroom/:id', component: UpdateroomComponent },
   { path: 'booking', component: ViewbookingComponent },
-  {path:'bookingcreat',component:CreatebookingComponent},
+  { path: 'bookingcreat/:roomId', component: CreatebookingComponent },
   { path: 'reg', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },

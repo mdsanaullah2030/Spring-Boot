@@ -20,12 +20,22 @@ export class ViewhotelComponent {
     private route: ActivatedRoute,
     private hotelService: HotelService,
     private locationService: LocationService,
-    private router: Router
+    private router: Router,
+    
   ) {
     this.locationId = this.route.snapshot.paramMap.get('locationId') || '';
   }
 
   ngOnInit(): void {
+
+    this.locationService.getCheckinDate();
+    this.locationService.getCheckoutDate();
+
+    console.log(this.locationService.getCheckinDate() + "          "+
+    this.locationService.getCheckoutDate());
+
+    console.log("**************************************")
+
     if (this.locationId) {
       this.getLocationDetails(this.locationId);
       this.getHotelsByLocation(this.locationId);

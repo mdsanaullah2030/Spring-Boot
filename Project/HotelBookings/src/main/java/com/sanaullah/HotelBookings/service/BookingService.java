@@ -42,17 +42,17 @@ public class BookingService {
         Hotel hotel = roomRepository.findHotelByRoomId(room.getId());
 
 
-        java.sql.Date checkinDate = booking.getCheckindate();
-        java.sql.Date checkoutDate = booking.getCheckoutdate();
-
-    // Calculate the difference in milliseconds
-        long diffInMillies = checkoutDate.getTime() - checkinDate.getTime();
-
-    // Convert milliseconds to days
-        int dayCount = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-        float totalPrice=room.getPrice()*dayCount;
-
-        booking.setTotalprice(totalPrice);
+        java.sql.Date checkindate = booking.getCheckindate();
+        java.sql.Date checkoutdate = booking.getCheckoutdate();
+//
+//    // Calculate the difference in milliseconds
+//        long diffInMillies = checkoutdate.getTime() - checkindate.getTime();
+//
+//    // Convert milliseconds to days
+//        int dayCount = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+//        float totalPrice=room.getPrice()*dayCount;
+//
+//        booking.setTotalprice(totalPrice);
 
         booking.setRoom(room);
         booking.setHotel(hotel);

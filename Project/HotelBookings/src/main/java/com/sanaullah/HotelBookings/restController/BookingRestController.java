@@ -19,13 +19,13 @@ public class BookingRestController {
     private BookingService bookingService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveBooking(
+    public ResponseEntity<Booking> saveBooking(
             @RequestBody Booking booking
     ) throws IOException {
 
         bookingService.saveBookings(booking);
 
-        return new ResponseEntity<>("Booking added successfully.", HttpStatus.OK);
+        return new ResponseEntity<>(booking, HttpStatus.OK);
     }
 
     @GetMapping("/")
