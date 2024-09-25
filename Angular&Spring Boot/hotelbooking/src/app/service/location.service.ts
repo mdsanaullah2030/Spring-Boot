@@ -23,6 +23,10 @@ export class LocationService {
   constructor(private httpClient: HttpClient) { }
 
 
+
+
+  
+
   setCheckinDate(date: string): void {
     this.checkinDate = date;
   }
@@ -38,6 +42,9 @@ export class LocationService {
   getCheckoutDate(): string {
     return this.checkoutDate;
   }
+
+
+
 
 
 
