@@ -3,10 +3,10 @@ import { RoomModel } from "./room.model";
 
 export class BookingModel {
   id!: string;
-  username!: string;
+ // username!: string;
   checkindate!: Date;
   checkoutdate!: Date;
-  totalprice!: number;
+ totalprice!: number;
 
   hotel!: HotelModel;
   room!: RoomModel;

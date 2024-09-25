@@ -2,6 +2,7 @@ import { Component, } from '@angular/core';
 import { HotelService } from '../../service/hotel.service';
 import { RoomService } from '../../service/room.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LocationService } from '../../service/location.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class ViewroomComponent {
     private route: ActivatedRoute,
     private roomService: RoomService,
     private hotelService: HotelService,
-    private router: Router
+    private router: Router,
+    private locationService:LocationService
   ) {
     this.hotelId = this.route.snapshot.paramMap.get('hotelId') || '';  // Get hotel ID from route parameters
   }
@@ -28,6 +30,12 @@ export class ViewroomComponent {
       this.getHotelDetails(this.hotelId);
       this.getRoomsByHotel(this.hotelId);
     }
+
+    this.locationService.getCheckinDate();
+  this.locationService.getCheckoutDate();
+
+  console.log(this.locationService.getCheckinDate()+"Room"+
+  this.locationService.getCheckoutDate())
   }
 
   // Fetch hotel details using HotelService
@@ -61,6 +69,11 @@ export class ViewroomComponent {
 
   }
 
+
+
+  bookRoom(roomId: number) {
+    this.router.navigate(['/bookingcreat', roomId]);
+  }
 }
 
 

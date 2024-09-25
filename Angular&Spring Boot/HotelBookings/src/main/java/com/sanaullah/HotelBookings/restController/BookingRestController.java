@@ -19,18 +19,29 @@ public class BookingRestController {
     private BookingService bookingService;
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveBooking(
+    public ResponseEntity<Booking> saveBooking(
             @RequestBody Booking booking
     ) throws IOException {
 
         bookingService.saveBookings(booking);
 
-        return new ResponseEntity<>("Booking added successfully.", HttpStatus.OK);
+        return new ResponseEntity<>(booking, HttpStatus.OK);
     }
 
     @GetMapping("/")
     public ResponseEntity<List<Booking>> getAllBookings() {
         List<Booking> bookings = bookingService.getAllBookings();
         return ResponseEntity.ok(bookings);
+    }
+
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateBooking(@PathVariable int id, @RequestBody Booking updatedBooking) {
+        try {
+            bookingService.updateBooking(id, updatedBooking);
+            return ResponseEntity.ok("Booking updated successfully.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }

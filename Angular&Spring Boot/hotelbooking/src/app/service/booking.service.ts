@@ -1,7 +1,8 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { BookingModel } from '../model/booking.model';
 
 
 @Injectable({
@@ -18,8 +19,19 @@ export class BookingService {
   }
   
 
+  createBoking(booking: BookingModel): Observable<BookingModel> {
+  
+    return this.http.post<BookingModel>(this.baseUrl + "save", booking, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  
+  }
+  
 
-
+  private handleError(error:any) {
+    console.error('An error occurred:', error);
+    return throwError(() => new Error('test'));
+  }
 
 
 }
