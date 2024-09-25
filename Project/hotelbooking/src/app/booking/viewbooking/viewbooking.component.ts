@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingService } from '../../service/booking.service';
 import { BookingModel } from '../../model/booking.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,10 @@ import { BookingModel } from '../../model/booking.model';
 export class ViewbookingComponent implements OnInit {
   bookings: BookingModel[] = [];
 
-  constructor(private bookingService: BookingService) {}
+  constructor(private bookingService: BookingService,
+    private router: Router
+
+  ) {}
 
   ngOnInit(): void {
     this.loadBookings();
@@ -28,4 +32,5 @@ export class ViewbookingComponent implements OnInit {
       }
     });
   }
+
 }

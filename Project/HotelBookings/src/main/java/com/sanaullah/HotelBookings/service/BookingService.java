@@ -8,8 +8,10 @@ import com.sanaullah.HotelBookings.repository.HotelRepository;
 import com.sanaullah.HotelBookings.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -60,4 +62,31 @@ public class BookingService {
 
 
     }
+
+
+
+    public void updateBooking(int id, Booking updatedBooking) {
+        // Fetch the existing booking
+        Booking existingBooking = bookingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Booking not found with this ID"));
+
+        // Update booking fields
+        existingBooking.setCheckindate(updatedBooking.getCheckindate());
+        existingBooking.setCheckoutdate(updatedBooking.getCheckoutdate());
+
+        // Recalculate the total price based on updated check-in and check-out dates
+        long diffInMillies = updatedBooking.getCheckoutdate().getTime() - updatedBooking.getCheckindate().getTime();
+        int dayCount = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        float totalPrice = existingBooking.getRoom().getPrice() * dayCount;
+        existingBooking.setTotalprice(totalPrice);
+
+        // Find and set the room associated with the booking
+        Room room = roomRepository.findById(updatedBooking.getRoom().getId())
+                .orElseThrow(() -> new RuntimeException("Room with this ID not found"));
+        existingBooking.setRoom(room);
+
+        // Save the updated booking (not the room)
+        bookingRepository.save(existingBooking);
+    }
+
 }

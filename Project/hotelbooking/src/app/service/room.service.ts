@@ -83,6 +83,9 @@ export class RoomService {
   
 
 
+  getRoomById(roomId: number): Observable<RoomModel> {
+    return this.httpClient.get<RoomModel>(`${this.baseUrl}${roomId}`);
+  }
 
   private handleError(error:any) {
     console.error('An error occurred:', error);

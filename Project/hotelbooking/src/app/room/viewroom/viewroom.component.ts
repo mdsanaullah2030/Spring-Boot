@@ -61,6 +61,11 @@ export class ViewroomComponent {
 
   }
 
+
+
+  bookRoom(roomId: number) {
+    this.router.navigate(['/bookingcreat'], { queryParams: { roomId: roomId } });
+  }
 }
 
 

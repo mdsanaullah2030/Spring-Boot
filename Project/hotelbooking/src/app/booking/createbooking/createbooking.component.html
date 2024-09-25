@@ -1,7 +1,7 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100 mt-5">
     <div class="container mt-5">
         <div class="container mt-8">
-            <h2>Create Booking</h2>
+
             <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="hotel">Hotel</label>
@@ -27,7 +27,12 @@
                     <input type="date" class="form-control" formControlName="checkoutdate" required />
                 </div>
 
-                <button type="submit" class="btn btn-primary" [disabled]="bookingForm.invalid">Create Booking</button>
+                <div class="form-group">
+                    <label for="totalprice">Total Price</label>
+                    <input type="text" class="form-control" formControlName="totalprice">
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="bookingForm">Create Booking</button>
             </form>
         </div>
     </div>

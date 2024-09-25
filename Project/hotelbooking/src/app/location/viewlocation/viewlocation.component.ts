@@ -12,13 +12,14 @@ import { Router } from '@angular/router';
 export class ViewlocationComponent {
   locations: any[] = [];
   filteredLocations: any[] = [];
-  searchTerm: string = '';
-  selectedLocationName: string = '';
+  selectedLocationName: string = ''; // Store the selected location object
+  checkinDate: string = '';
+  checkoutDate: string = '';
 
   constructor(
     private locationService: LocationService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadLocations();
@@ -35,7 +36,6 @@ export class ViewlocationComponent {
       }
     });
   }
-
 
   onLocationSelect(event: Event) {
     const target = event.target as HTMLSelectElement;
@@ -55,6 +55,28 @@ export class ViewlocationComponent {
       this.filteredLocations = [...this.locations];
     }
   }
+
+  goToCreateBooking() {
+    if (!this.checkinDate || !this.checkoutDate) {
+      alert('Please select check-in and check-out dates.');
+      return;
+    }
+
+    if (!this.selectedLocationName) {
+      alert('Please select a location.');
+      return;
+    }
+
+    const locationId = this.selectedLocationName;  // Get the location ID from the selected location
+    this.router.navigate(['/createbooking'], {
+      queryParams: {
+        checkinDate: this.checkinDate,
+        checkoutDate: this.checkoutDate,
+        locationId: locationId  // Pass the selected location ID
+      }
+    });
+  }
+
 
   viewHotels(locationId: string): void {
     this.router.navigate(['/hotel', locationId]); // Navigate to the ViewhotelComponent
