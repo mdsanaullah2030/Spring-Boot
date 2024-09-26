@@ -4,7 +4,6 @@ import { HotelModel } from '../../model/hotel.model';
 import { HotelService } from '../../service/hotel.service';
 import { RoomService } from '../../service/room.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -22,8 +21,7 @@ export class UpdateroomComponent implements OnInit {
     private hotelService: HotelService,
     private roomService: RoomService,
     private router: Router,
-    private route: ActivatedRoute,
-    private authService: AuthService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +54,7 @@ export class UpdateroomComponent implements OnInit {
   }
 
   updateRoom(): void {
-    this.roomService.updateRoom(this.id, this.rooms).subscribe({
+    this.roomService.updateRoom(this.id, this.rooms, this.selectedImage).subscribe({
       next: () => {
         this.router.navigate(['/room']); 
       },

@@ -2,7 +2,6 @@ package com.sanaullah.HotelBookings.restController;
 
 import com.sanaullah.HotelBookings.entity.Hotel;
 import com.sanaullah.HotelBookings.entity.Location;
-import com.sanaullah.HotelBookings.entity.Room;
 import com.sanaullah.HotelBookings.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,34 +40,24 @@ public class HotelRestController {
         return ResponseEntity.ok(hotels);
     }
 
-
-
-//Singel Hotel Show Hotel number(id) show hotel//
-
     @GetMapping("/{id}")
     public ResponseEntity<Hotel> getHotelById(@PathVariable int id) {
         Hotel hotel = hotelService.getHotelById(id);
         return ResponseEntity.ok(hotel);
     }
 
-
-
-//searchhotel//
-
     @GetMapping("/h/searchhotel")
     public ResponseEntity<List<Hotel>> findHotelsByLocationName(@RequestParam(value = "locationName") String locationName) {
         List<Hotel> hotels = hotelService.findHotelsByLocationName(locationName);
         return ResponseEntity.ok(hotels);
     }
+
     //hotel to room serarch id Use//
     @GetMapping("/h/searchhotelid")
     public ResponseEntity<List<Hotel>> findHotelsByLocationId(@RequestParam("locationid") int locationId) {
         List<Hotel> hotels = hotelService.findHotelsByLocationId(locationId);
         return ResponseEntity.ok(hotels);
     }
-
-
-
 
 
 

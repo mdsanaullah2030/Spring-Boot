@@ -21,20 +21,26 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/hotel">
+                      <a class="nav-link" href="#">
                           <i class="fa fa-plus-circle" aria-hidden="true"></i> Hotel
                       </a>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="createhotel">
-                          <i class="fa fa-bed" aria-hidden="true"></i>Add Hotel
-                      </a>
+                  <li *ngIf="isAdmin || isHotel" class="nav-item">
+                    <a class="nav-link" href="createhotel">
+                      <i class="fa fa-bed" aria-hidden="true"></i> Add Hotel
+                    </a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="createroom">
                           <i class="fa fa-calendar-check-o" aria-hidden="true"></i>Add Room
                       </a>
                   </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="booking">
+                          <i class="fa fa-calendar-check-o" aria-hidden="true"></i>Booking
+                      </a>
+                  </li>
+              
                   <li class="nav-item">
                       <a class="nav-link" href="login">
                           <i class="fa fa-sign-in" aria-hidden="true"></i> Login
@@ -46,7 +52,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="logout">
+                      <a class="nav-link" href="#">
                           <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
                       </a>
                   </li>

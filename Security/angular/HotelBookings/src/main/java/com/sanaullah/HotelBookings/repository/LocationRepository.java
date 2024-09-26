@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LocationRepository extends JpaRepository<Location,Integer> {
+public interface LocationRepository extends JpaRepository<Location, Integer> {
+
     @Query("SELECT l FROM Location l WHERE l.name = :locationName")
     List<Location> findLocationName(@Param("locationName") String locationName);
 
 
 }
-

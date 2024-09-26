@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface HotelRepository extends JpaRepository<Hotel,Integer> {
 
-
     //Location to hotel name//
 
     @Query("SELECT h FROM Hotel h WHERE h.location.name = :locationName")
@@ -19,12 +18,8 @@ public interface HotelRepository extends JpaRepository<Hotel,Integer> {
     @Query("Select h from Hotel h Where h.location.id= :locationid")
     public List<Hotel> findHotelsByLocationId(@Param("locationid") int locationid);
 
-//delete location+Hotel+room//
+
     List<Hotel> findAllByLocationId(int locationId);
+
     public List<Hotel> deleteAllByLocationId(int locationId);
-
-
-
-
-
 }

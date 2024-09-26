@@ -1,25 +1,27 @@
+
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminHotelGuard implements CanActivate {
- 
-
+export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
-
   canActivate(): boolean {
-    if (this.authService.isAdminOrHotel()) {
+    if (this.authService.isLoggedIn()) {
       return true;
     } else {
-      this.router.navigate(['/login']); // Redirect to a forbidden page if unauthorized
+      this.router.navigate(['/login']);
       return false;
     }
   }
+
+  
 }

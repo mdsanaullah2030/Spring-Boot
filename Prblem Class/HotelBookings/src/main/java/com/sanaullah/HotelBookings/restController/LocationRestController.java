@@ -85,8 +85,6 @@ public class LocationRestController {
         }
     }
 
-
-    //serche//
     @GetMapping("/findLocationName")
     public ResponseEntity<List<Location>> findLocationName(@RequestParam(value = "locationName") String locationName) {
         List<Location> location = locetionService.findLocationName(locationName);

@@ -1,5 +1,5 @@
 import { Role } from "./Role.model";
-import { Token } from "./Token.model";
+import { Token } from "./token.model";
 
 
 export class User {

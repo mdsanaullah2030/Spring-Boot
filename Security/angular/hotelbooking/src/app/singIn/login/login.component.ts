@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,7 +37,7 @@ export class LoginComponent {
       next: (response) => {
         this.successMessage = 'Login successful!';
         this.errorMessage = null;
-        this.router.navigate(['/home']); // Redirect to home or another route after login
+        this.router.navigate(['/hotel']); // Redirect to home or another route after login
       },
       error: (err) => {
         this.errorMessage = 'Login failed. Please check your credentials.';
@@ -44,6 +45,5 @@ export class LoginComponent {
       }
     });
   }
-
 
 }

@@ -28,7 +28,6 @@ import { RegistrationComponent } from './singIn/registration/registration.compon
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,9 +46,9 @@ import { RegistrationComponent } from './singIn/registration/registration.compon
     HomeComponent,
     AboutComponent,
     LoginComponent,
- 
-    RegistrationComponent,
-
+  
+    RegistrationComponent
+   
    
   ],
   imports: [

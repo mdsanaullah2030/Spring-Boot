@@ -1,31 +1,17 @@
+import { HotelModel } from "./hotel.model";
+import { RoomModel } from "./room.model";
+
 export class BookingModel {
   id!: string;
-  username!: string;
+ // username!: string;
   checkindate!: Date;
   checkoutdate!: Date;
-  totalprice!: number;
+ totalprice!: number;
 
+  hotel!: HotelModel;
+  room!: RoomModel;
 
-  room!: {
-    id: string | undefined
-    roomtype: string | undefined;
-    hotelname: number | undefined;
-    adults: string | undefined;
-    children: string | undefined;
-    price: string | undefined;
-
-  }
-  hotel!: {
-    id: string | undefined;
-    hotelname: string | undefined;
-    address: string | undefined;
-    rating: string | undefined;
-  }
-  location!: {
-    id: string | undefined;
-    locationname: string | undefined;
-  }
 
 
 }
-   
+

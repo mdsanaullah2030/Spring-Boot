@@ -1,5 +1,6 @@
 package com.sanaullah.HotelBookings.repository;
 
+import com.sanaullah.HotelBookings.entity.Hotel;
 import com.sanaullah.HotelBookings.entity.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,13 @@ public interface RoomRepository extends JpaRepository<Room,Integer> {
 
     @Query("Select r from Room r Where r.hotel.id= :hotelid")
     public List<Room> findRoomByHotelId(@Param("hotelid") int hotelid);
+
+    public List<Room> findAllByHotelId(int hotelId);
+
+    public List<Room> deleteAllByHotelId(int hotelId);
+
+
+    @Query("SELECT r.hotel FROM Room r WHERE r.id = :roomId")
+    Hotel findHotelByRoomId(int roomId);
+
 }

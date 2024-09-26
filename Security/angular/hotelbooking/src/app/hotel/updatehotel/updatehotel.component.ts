@@ -55,7 +55,7 @@ export class UpdatehotelComponent implements OnInit{
   }
 
   updateHotel(): void {
-    this.hotelService.updateHotel(this.id, this.hotel).subscribe({
+    this.hotelService.updateHotel(this.id, this.hotel, this.selectedImage).subscribe({
       next: () => {
         this.router.navigate(['/hotel']); 
       },

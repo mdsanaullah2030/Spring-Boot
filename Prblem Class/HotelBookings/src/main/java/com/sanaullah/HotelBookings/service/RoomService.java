@@ -94,31 +94,14 @@ public class RoomService {
         roomRepository.save(existingRoom);
     }
 
-
-
-
-
-
-    //hotel to room Hotel Name//
     public List<Room> findRoomByHotelName(String hotelName) {
 
         return roomRepository.findRoomByHotelName(hotelName);
 
     }
-    //hotel to room Hotel ID//
-    public List<Room> findRoomByHotelId(int hotelid) {
-
-        return roomRepository.findRoomByHotelId(hotelid);
-
-    }
 
 
 
-
-
-
-
-//image save//
     private String saveImage(MultipartFile file, Room r) throws IOException {
         Path uploadPath = Paths.get(uploadDir + "/room");
         if (!Files.exists(uploadPath)) {
@@ -139,8 +122,6 @@ public class RoomService {
 
 
 
-    //Update//
-
     public void updateRoom(Room room) {
         roomRepository.save(room);
     }
@@ -153,7 +134,11 @@ public class RoomService {
     }
 
 
+    public List<Room> findRoomByHotelId(int hotelid) {
 
+        return roomRepository.findRoomByHotelId(hotelid);
+
+    }
 
 
 

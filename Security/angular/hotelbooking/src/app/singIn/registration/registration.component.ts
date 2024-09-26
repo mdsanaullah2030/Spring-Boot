@@ -10,9 +10,6 @@ import { Router } from '@angular/router';
   styleUrl: './registration.component.css'
 })
 export class RegistrationComponent {
-
-  
-  
   registerForm: FormGroup;
   errorMessage: string | null = null;
   successMessage: string | null = null;
@@ -63,7 +60,5 @@ export class RegistrationComponent {
    }
     );
   }
-
-
 
 }

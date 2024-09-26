@@ -1,8 +1,12 @@
+
 package com.sanaullah.HotelBookings.service;
 
 import com.sanaullah.HotelBookings.entity.Hotel;
 import com.sanaullah.HotelBookings.entity.Location;
+import com.sanaullah.HotelBookings.entity.Room;
+import com.sanaullah.HotelBookings.repository.HotelRepository;
 import com.sanaullah.HotelBookings.repository.LocationRepository;
+import com.sanaullah.HotelBookings.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,6 +27,10 @@ public class LocetionService {
 
     @Value("src/main/resources/static/images")
     private String uploadDir;
+    @Autowired
+    private RoomRepository roomRepository;
+    @Autowired
+    private HotelRepository hotelRepository;
 
     public List<Location> getALlLocation(){
 
@@ -96,16 +104,28 @@ public class LocetionService {
         return   locationRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Location Not Found by this Id"));
     }
+
+
     @Transactional
-    public void deleteLocation(int id) {
-        locationRepository.deleteById(id);
+    public boolean deleteLocation(int id) {
+        try {
+            List<Hotel> hotels = hotelRepository.findAllByLocationId(id);
+            for (Hotel hotel : hotels) {
+                roomRepository.deleteAllByHotelId(hotel.getId());
+            }
+            hotelRepository.deleteAllByLocationId(id);
+            locationRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 
 
 
 
-    public List<Location>findLocationName(String locationName){
+    public List<Location> findLocationName(String locationName){
         return locationRepository.findLocationName(locationName);
     }
 }

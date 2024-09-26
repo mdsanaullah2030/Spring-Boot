@@ -1,3 +1,4 @@
+
 package com.sanaullah.HotelBookings.service;
 
 import com.sanaullah.HotelBookings.entity.Hotel;

@@ -1,31 +1,31 @@
-import { Component, } from '@angular/core';
+import { Component } from '@angular/core';
 import { LocationService } from '../../service/location.service';
-import { Router } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-viewlocation',
   templateUrl: './viewlocation.component.html',
-  styleUrl: './viewlocation.component.css'
+  styleUrls: ['./viewlocation.component.css']
 })
 
 export class ViewlocationComponent {
   locations: any[] = [];
   filteredLocations: any[] = [];
-  searchTerm: string = '';
-  selectedLocationName: string = '';
+  selectedLocationName: string = ''; 
+  checkinDate: string = '';
+  checkoutDate: string = '';
 
   constructor(
     private locationService: LocationService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadLocations();
   }
 
   loadLocations() {
-    this.locationService.getAllLocationforHotel().subscribe({
+    this.locationService.getAllLocation().subscribe({
       next: (data) => {
         this.locations = data;
         this.filteredLocations = [...this.locations];
@@ -36,11 +36,9 @@ export class ViewlocationComponent {
     });
   }
 
-
   onLocationSelect(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.selectedLocationName = target.value;
-
 
     if (this.selectedLocationName) {
       this.locationService.findLocationName(this.selectedLocationName).subscribe({
@@ -55,6 +53,52 @@ export class ViewlocationComponent {
       this.filteredLocations = [...this.locations];
     }
   }
+
+  goToCreateBooking() {
+    if (!this.checkinDate || !this.checkoutDate) {
+      alert('Please select check-in and check-out dates.');
+      return;
+    }
+
+    if (new Date(this.checkoutDate) <= new Date(this.checkinDate)) {
+      alert('Check-out date must be after check-in date.');
+      return;
+    }
+
+    if (!this.selectedLocationName) {
+      alert('Please select a location.');
+      return;
+    }
+
+    const locationId = this.selectedLocationName; 
+    this.router.navigate(['/createbooking'], {
+      queryParams: {
+        checkinDate: this.checkinDate,
+        checkoutDate: this.checkoutDate,
+        locationId: locationId 
+      }
+    });
+  }
+
+  viewHotels(locationId: string): void {
+    if (!this.checkinDate || !this.checkoutDate) {
+      alert('Please select check-in and check-out dates.');
+      return;
+    }
+
+    if (new Date(this.checkoutDate) <= new Date(this.checkinDate)) {
+      alert('Check-out date must be after check-in date.');
+      return;
+    }
+
+    this.locationService.setCheckinDate(this.checkinDate);
+    this.locationService.setCheckoutDate(this.checkoutDate);
+
+    this.router.navigate(['/hotel', locationId], {
+      queryParams: {
+        checkinDate: this.checkinDate,
+        checkoutDate: this.checkoutDate
+      }
+    });
+  }
 }
-
-

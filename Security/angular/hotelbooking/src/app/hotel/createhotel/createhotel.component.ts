@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HotelService } from '../../service/hotel.service';
 import { Router } from '@angular/router';
 import { LocationService } from '../../service/location.service';
-import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -32,8 +31,7 @@ export class CreatehotelComponent {
     private hotelService: HotelService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private locationService: LocationService,
-    private authService: AuthService
+    private locationService: LocationService
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +55,7 @@ export class CreatehotelComponent {
   }
 
   loadLocations() {  
-    this.locationService.getAllLocationforHotel().subscribe({
+    this.locationService.getAllLocation().subscribe({
       next: res => {
         this.locations = res;
         console.log(this.locations);

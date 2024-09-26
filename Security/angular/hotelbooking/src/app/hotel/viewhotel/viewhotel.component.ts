@@ -2,7 +2,7 @@ import { Component,} from '@angular/core';
 import { HotelService } from '../../service/hotel.service';
 import { LocationService } from '../../service/location.service';
 import { RoomService } from '../../service/room.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -12,71 +12,81 @@ import { Router } from '@angular/router';
 })
 export class ViewhotelComponent {
 
-  locations: any;
-  hotels: any;
-  rooms:any;
+  locationId: string;
+  location: any;
+  hotels: any[] = [];
 
   constructor(
+    private route: ActivatedRoute,
     private hotelService: HotelService,
     private locationService: LocationService,
-    private roomService: RoomService,
-    private router: Router
-
-  ) { }
+    private router: Router,
+    
+  ) {
+    this.locationId = this.route.snapshot.paramMap.get('locationId') || '';
+  }
 
   ngOnInit(): void {
 
-    this.loadLocations();
+    this.locationService.getCheckinDate();
+    this.locationService.getCheckoutDate();
+
+    console.log(this.locationService.getCheckinDate() + "          "+
+    this.locationService.getCheckoutDate());
+
+    console.log("**************************************")
+
+    if (this.locationId) {
+      this.getLocationDetails(this.locationId);
+      this.getHotelsByLocation(this.locationId);
+    }
   }
 
+  getLocationDetails(locationId: string): void {
+    this.locationService.getLocationById(locationId).subscribe({
+      next: res => {
+        this.location = res;
+        console.log('Location details loaded:', this.location);
+      },
+      error: err => {
+        console.error('Error loading location details', err);
+      }
+    });
+  }
 
-  loadLocations() {
-
-    this.locations = this.locationService.getAllLocationforHotel();
-    this.hotelService.getAllHotelforRoom().subscribe({
-
+  getHotelsByLocation(locationId: string): void {
+    this.hotelService.getHotelsByLocation(locationId).subscribe({
       next: res => {
         this.hotels = res;
+        console.log('Hotels loaded:', this.hotels);
       },
-
       error: err => {
-        console.log(err)
-
+        console.error('Error loading hotels', err);
       }
-
     });
-
-
   }
 
- 
-
+  updateHotel(id: string): void {
+    this.router.navigate(['/updatehotel', id]);
+  }
 
   viewRooms(hotelId: string): void {
- 
     this.router.navigate(['/room', hotelId]);
   }
 
-  
-  updateHotel(id: string) {
-    this.router.navigate(['/updatehotel',id]);
-
-  }
-  deleteHotel(id: string): void {
+  deleteHotel(id: number): void {
     if (confirm('Are you sure you want to delete this hotel?')) {
       this.hotelService.deleteHotel(id).subscribe({
         next: () => {
-        
-          this.hotels = this.hotels.filter((hotel: any) => hotel.id !== id);
+          this.hotels = this.hotels.filter(hotel => hotel.id !== id);
         },
-        error: (err) => {
+        error: err => {
           console.error('Error deleting hotel:', err);
         }
       });
     }
   }
-  
-  }
+}
 
 
 

@@ -3,7 +3,6 @@ import { LocationModel } from '../../model/location.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LocationService } from '../../service/location.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service';
 
 
 
@@ -24,7 +23,6 @@ export class CreatelocationComponent {
     private locationService: LocationService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +59,7 @@ export class CreatelocationComponent {
   }
 
   loadLocations() {
-    this.locationService.getAllLocationforHotel().subscribe({
+    this.locationService.getAllLocation().subscribe({
       next: (data) => {
         this.locations = data;
         this.filteredLocations = [...this.locations]; // Set filtered locations to all
