@@ -86,26 +86,12 @@ export class ViewhotelComponent {
     });
   }
 
-  updateHotel(id: string): void {
-    this.router.navigate(['/updatehotel', id]);
-  }
 
   viewRooms(hotelId: string): void {
     this.router.navigate(['/room', hotelId]);
   }
 
-  deleteHotel(id: number): void {
-    if (confirm('Are you sure you want to delete this hotel?')) {
-      this.hotelService.deleteHotel(id).subscribe({
-        next: () => {
-          this.hotels = this.hotels.filter(hotel => hotel.id !== id);
-        },
-        error: err => {
-          console.error('Error deleting hotel:', err);
-        }
-      });
-    }
-  }
+ 
 }
 
 

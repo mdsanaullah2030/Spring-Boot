@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'creat', component: CreatelocationComponent },
   { path: 'update/:id', component: UpdatelocationComponent },
   { path: 'hotel/:locationId', component: ViewhotelComponent },
-  { path: 'createhotel', component: CreatehotelComponent ,canActivate: [AdminHotelGuard]},
+  { path: 'createhotel', component: CreatehotelComponent },
   { path: 'updatehotel/:id', component: UpdatehotelComponent },
   { path: 'room/:hotelId', component: ViewroomComponent },
   { path: 'createroom', component: CreateroomComponent },

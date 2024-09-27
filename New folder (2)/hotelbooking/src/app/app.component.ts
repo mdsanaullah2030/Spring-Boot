@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AuthService } from './service/auth.service';
 import { Router } from '@angular/router';
+import { faHotel, faMapMarkerAlt, faDollarSign, faStar, faMap, faImage, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,14 @@ export class AppComponent implements OnInit{
 
   userRole: string | null = null;
 
+  
+  faHotel = faHotel;
+  faMapMarkerAlt = faMapMarkerAlt;
+  faDollarSign = faDollarSign;
+  faStar = faStar;
+  faMap = faMap;
+  faImage = faImage;
+  faPlus = faPlus;
 
   constructor( public authService: AuthService, private router:Router,
     @Inject(PLATFORM_ID) private platformId: Object

@@ -10,9 +10,9 @@ import { AboutComponent } from './style/about/about.component';
 import { HomeComponent } from './style/home/home.component';
 import { RegistrationComponent } from './singIn/registration/registration.component';
 import { LoginComponent } from './singIn/login/login.component';
-import { AuthGuard } from './guard/authguard.guard';
-import { LogoutComponent } from './singIn/logout/logout.component';
-import { UserprofileComponent } from './user/userprofile/userprofile.component';
+
+
+
 import { ViewroomComponent } from './room/viewroom/viewroom.component';
 import { CreateroomComponent } from './room/createroom/createroom.component';
 import { UpdatelocationComponent } from './location/updatelocation/updatelocation.component';
@@ -20,6 +20,7 @@ import { UpdateroomComponent } from './room/updateroom/updateroom.component';
 import { UpdatehotelComponent } from './hotel/updatehotel/updatehotel.component';
 import { ViewbookingComponent } from './booking/viewbooking/viewbooking.component';
 import { CreatebookingComponent } from './booking/createbooking/createbooking.component';
+import { AdminHotelGuard } from './guard/admin-hotel.guard';
 
 
 const routes: Routes = [
@@ -39,10 +40,10 @@ const routes: Routes = [
   { path: 'updateroom/:id', component: UpdateroomComponent },
   { path: 'booking', component: ViewbookingComponent },
   { path: 'bookingcreat/:roomId', component: CreatebookingComponent },
-  { path: 'reg', component: RegistrationComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LogoutComponent },
-  { path: 'userprofile', component: UserprofileComponent },
+  { path: 'register', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent }
+  
+
 
 
 ];

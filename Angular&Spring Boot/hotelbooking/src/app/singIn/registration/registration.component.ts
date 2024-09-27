@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { AuthResponse } from '../../model/AuthResponse';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
-import { UserModel } from '../../model/user.model';
 
 @Component({
   selector: 'app-registration',
@@ -10,40 +10,55 @@ import { UserModel } from '../../model/user.model';
   styleUrl: './registration.component.css'
 })
 export class RegistrationComponent {
-
-  regForm!: FormGroup;
+  registerForm: FormGroup;
+  errorMessage: string | null = null;
+  successMessage: string | null = null;
 
   constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router,
-    private formBuilder: FormBuilder
-
+    private router: Router
   ) {
-    this.regForm = this.formBuilder.group({
+    this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-
-
-    })
-
-  }
-  onSubmit(): void {
-    if (this.regForm.valid) {
-      const user: UserModel = this.regForm.value;
-      this.authService.registration(user).subscribe({
-        next: (res) => {
-          console.log('User registered successfully:', res);
-          this.authService.storeToken(res.token);
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          console.error('Error registering user:', err);
-        }
-      });
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      cell: [''],
+      address: [''],
+      dob: [''],
+      gender: [''],
+      image: ['']
     }
-    else {
-      alert("Complte mandatory Field");
-    }
+    ,{ validators: this.passwordMatchValidator });
   }
+
+  passwordMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
+  }
+
+  onSubmit() {
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    const { name, email, password, cell, address, dob, gender, image } = this.registerForm.value;
+
+    this.authService.register({ name, email, password, cell, address, dob, gender, image }).subscribe(
+   {
+
+    next: AuthResponse => {
+      this.successMessage = 'Registration successful! Please check your email to activate your account.';
+      this.router.navigate(['/login']);
+    },
+    error:error => {
+      this.errorMessage = 'Registration failed. Please try again.';
+    }
+
+   }
+    );
+  }
+
 }

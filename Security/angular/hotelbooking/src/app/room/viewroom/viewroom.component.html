@@ -42,13 +42,7 @@
             <p class="card-text">Children: {{ room.childNo }}</p>
             <p class="card-text">Price: BDT {{ room.price }}</p>
     
-            <ul class="list-unstyled">
-              <li><i class="fas fa-wifi"></i> Wi-Fi</li>
-              <li><i class="fas fa-shower"></i> Shower</li>
-              <li><i class="fas fa-tv"></i> Television</li>
-              <li><i class="fas fa-fan"></i> Air Conditioning</li>
-              <li><i class="fas fa-parking"></i> Parking</li>
-            </ul>
+         
     
             <p class="card-text">Availability: {{ room.availability ? 'Available' : 'Not Available' }}</p>
             <button (click)="updateRoom(room.id)" class="btn btn-danger">Edit</button>

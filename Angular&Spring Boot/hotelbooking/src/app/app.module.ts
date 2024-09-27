@@ -23,9 +23,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { HomeComponent } from './style/home/home.component';
 import { AboutComponent } from './style/about/about.component';
 import { LoginComponent } from './singIn/login/login.component';
-import { LogoutComponent } from './singIn/logout/logout.component';
+
 import { RegistrationComponent } from './singIn/registration/registration.component';
-import { UserprofileComponent } from './user/userprofile/userprofile.component';
 
 
 
@@ -47,9 +46,9 @@ import { UserprofileComponent } from './user/userprofile/userprofile.component';
     HomeComponent,
     AboutComponent,
     LoginComponent,
-    LogoutComponent,
-    RegistrationComponent,
-    UserprofileComponent,
+  
+    RegistrationComponent
+   
    
   ],
   imports: [
