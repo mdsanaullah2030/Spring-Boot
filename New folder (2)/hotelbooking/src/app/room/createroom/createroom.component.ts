@@ -1,90 +1,93 @@
-import { Component, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RoomModel } from '../../model/room.model';
 import { HotelModel } from '../../model/hotel.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HotelService } from '../../service/hotel.service';
-import { Router } from '@angular/router';
 import { RoomService } from '../../service/room.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createroom',
   templateUrl: './createroom.component.html',
-  styleUrl: './createroom.component.css'
+  styleUrls: ['./createroom.component.css']
 })
-export class CreateroomComponent {
+export class CreateroomComponent implements OnInit {
   image: File | null = null;
-  hotel: RoomModel = new RoomModel();
   hotels: HotelModel[] = [];
-  formGroup!:FormGroup;
+  formGroup!: FormGroup;
+  rooms: RoomModel[] = [];
 
-
-
-  roomtyp: { value: string, label: string }[] = [
+  roomtyp = [
     { value: 'Single Room', label: 'Single Room' },
     { value: 'Double Room', label: 'Double Room' },
-    { value: 'Triple Room', label: 'Triple Room'},
+    { value: 'Triple Room', label: 'Triple Room' },
     { value: 'Family Room', label: 'Family Room' },
-    { value: 'Superior Room', label: 'Superior Room'},
-    { value: 'Executive Room', label: 'Executive Room'},
-    { value: 'Presidential Suite', label: 'Presidential Suite' },
+    { value: 'Superior Room', label: 'Superior Room' },
+    { value: 'Executive Room', label: 'Executive Room' },
+    { value: 'Presidential Suite', label: 'Presidential Suite' }
   ];
-
-
 
   constructor(
     private hotelService: HotelService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private roomService:RoomService 
+    private roomService: RoomService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.loadHotels();  
+    this.loadHotels();
+    this.loadRooms();
 
-
-   this.formGroup = this.formBuilder.group({
-    roomType: [''],
-    area: [''],
-    adultNo: [''],
-    childNo: [''],
-    price: [''],
-    availability: [''],
-      hotel: [null]  
+    this.formGroup = this.formBuilder.group({
+      roomType: [''],
+      area: [''],
+      adultNo: [''],
+      childNo: [''],
+      price: [''],
+      availability: [''],
+      hotel: [null]
     });
-
-
   }
 
   onFileSelected(event: any) {
     this.image = event.target.files[0];
   }
 
-  loadHotels() {  
+  loadHotels() {
     this.hotelService.getAllHotel().subscribe({
       next: res => {
         this.hotels = res;
         console.log(this.hotels);
       },
       error: err => {
-        console.error('Error fetching hotels:', err);  
+        console.error('Error fetching hotels:', err);
+      }
+    });
+  }
+
+  loadRooms() {
+    this.roomService.getAllRooms().subscribe({
+      next: res => {
+        this.rooms = res;
+        console.log(this.rooms);
+      },
+      error: err => {
+        console.error('Error fetching rooms:', err);
       }
     });
   }
 
   onSubmit() {
     if (this.image) {
-
       const room: RoomModel = {
         ...this.formGroup.value,
         hotel: { id: this.formGroup.value.hotel } as HotelModel
       };
-  
+
       this.roomService.createRoom(room, this.image).subscribe({
         next: res => {
           console.log('Room added successfully', res);
-          this.router.navigate(['/room']);
-          console.log('Response:', res);
+          this.loadRooms();  // Reload rooms after adding
         },
         error: err => {
           console.error('Error adding room:', err);
@@ -95,5 +98,7 @@ export class CreateroomComponent {
     }
   }
 
-    
+  updateRoom(id: number) {
+    this.router.navigate(['/updateroom', id]);
   }
+}
