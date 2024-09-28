@@ -1,24 +1,22 @@
-<div class="container d-flex justify-content-center align-items-center min-vh-100 mt-5">
+<div class="container d-flex align-items-center min-vh-100 mt-5">
     <div class="container mt-5">
         <div class="row">
-            <div class="card md-4 m-1" style="width: 18rem;" *ngFor="let h of hotels; let i = index">
-                <img [src]="'http://localhost:8080/images/hotel/' + h.image" class="card-img-top my-1"
-                    alt="{{ h.name }}">
+            <!-- Adding col-12 class for responsive design -->
+            <div class="col-md-3 m-4 py-3"*ngFor="let h of hotels; let i = index">
+                <div class="card-body" style="width: 20rem;">
+                    <img [src]="'http://localhost:8080/images/hotel/' + h.image" class="card-img-top "
+                        alt="{{ h.name }}">
 
-                <div class="card-body">
-                    <h5 class="card-title">Name: {{h.name }}</h5>
-                    <p class="card-text">Address: {{ h.address}}</p>
-                    <fa-icon
-                    [icon]="i < rating ? faStarSolid : faStarRegular"
-                    (click)="rate(i + 1)"
-                    class="star"
-                  ></fa-icon>
-                    <p class="card-text">Price: BDT {{h.minPrice}}- BDT {{h.maxPrice}}</p>
-                    <p class="card-text">Location: {{ h.location.name}}</p>
+                    <h5 class="card-title">Name: {{ h.name }}</h5>
+                    <p class="card-text">Address: {{ h.address }}</p>
+                    <p class="card-text">Rating: {{ h.rating }}</p>
 
+                   
 
-                    <button class="btn theme_btn button_hover"(click)="viewRooms(h.id)">View</button>
-                    
+                    <p class="card-text">Price: BDT {{ h.minPrice }} - BDT {{ h.maxPrice }}</p>
+                    <p class="card-text">Location: {{ h.location.name }}</p>
+
+                    <button class="btn theme_btn button_hover" (click)="viewRooms(h.id)">View Room</button>
                 </div>
             </div>
         </div>

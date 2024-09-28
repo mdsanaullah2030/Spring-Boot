@@ -16,6 +16,8 @@ export class AppComponent implements OnInit{
 
   userRole: string | null = null;
 
+  
+  
 
   constructor( public authService: AuthService, private router:Router,
     @Inject(PLATFORM_ID) private platformId: Object

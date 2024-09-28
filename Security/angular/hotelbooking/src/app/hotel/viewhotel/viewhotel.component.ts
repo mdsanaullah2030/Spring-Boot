@@ -2,9 +2,7 @@ import { Component, EventEmitter, Input, Output,} from '@angular/core';
 import { HotelService } from '../../service/hotel.service';
 import { LocationService } from '../../service/location.service';
 import { RoomService } from '../../service/room.service';
-import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';  // Solid star icon
-import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
-// Regular star icon
+
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -21,21 +19,7 @@ export class ViewhotelComponent {
   
 
 
-  @Input() rating: number = 0;  // Current rating value (default 0)
-  @Input() maxStars: number = 5;  // Maximum stars (default 5)
-  @Output() ratingChange = new EventEmitter<number>();  // Event emitter for changes
 
-  faStarSolid = faStarSolid;
-  faStarRegular = faStarRegular;  // Fixed icon assignment
-
-  get stars() {
-    return Array(this.maxStars).fill(0);  // Creates an array for rendering stars
-  }
-
-  rate(star: number): void {
-    this.rating = star;
-    this.ratingChange.emit(this.rating);  // Emit the new rating value
-  }
   constructor(
     private route: ActivatedRoute,
     private hotelService: HotelService,

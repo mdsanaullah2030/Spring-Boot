@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HotelModel } from '../../model/hotel.model';
 import { LocationModel } from '../../model/location.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -17,8 +17,17 @@ export class CreatehotelComponent {
   locations: LocationModel[] = [];
   hotels: HotelModel[] = [];
   formGroup!: FormGroup;
-  rating: number = 0;
+ 
 
+
+  rating: { value: string, label: string }[] = [
+    { value: '**', label: '**' },
+    { value: '***', label: '***' },
+    { value: '****', label: '****' },
+    { value: '*****', label: '*****' },
+  ];
+
+ 
   constructor(
     private hotelService: HotelService,
     private formBuilder: FormBuilder,
@@ -74,7 +83,7 @@ export class CreatehotelComponent {
       const hotel: HotelModel = {
         ...this.formGroup.value,
         location: { id: this.formGroup.value.location } as LocationModel,
-        rating: this.rating
+       
       };
 
       this.hotelService.createHotel(hotel, this.image).subscribe({
