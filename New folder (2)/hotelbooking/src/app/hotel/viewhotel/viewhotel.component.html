@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <div class="row">
             <!-- Adding col-12 class for responsive design -->
-            <div class="col-lg-4 col-sm-6" *ngFor="let h of hotels; let i = index">
+            <div class="col-md-3 m-4 py-3"*ngFor="let h of hotels; let i = index">
                 <div class="card-body" style="width: 20rem;">
                     <img [src]="'http://localhost:8080/images/hotel/' + h.image" class="card-img-top "
                         alt="{{ h.name }}">
