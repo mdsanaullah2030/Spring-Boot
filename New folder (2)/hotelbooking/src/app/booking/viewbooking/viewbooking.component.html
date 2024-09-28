@@ -5,8 +5,9 @@
                 <th>Check-in Date</th>
                 <th>Check-out Date</th>
                 <th>Total Price</th>
-                <th>Hotel Name</th>
-                <th>Room Type</th>
+                <th> Hotel Name</th> <!-- Font Awesome Hotel Icon -->
+                <th>Room Type</th>  <!-- Font Awesome Bed Icon -->
+             
             </tr>
         </thead>
         <tbody>
@@ -14,8 +15,9 @@
                 <td>{{ booking.checkindate | date }}</td>
                 <td>{{ booking.checkoutdate | date }}</td>
                 <td>{{ booking.totalprice | currency }}</td>
-                <td>{{ booking.room.hotel.name }}</td> 
-                <td>{{ booking.room.roomType }}</td> 
+                <td>{{ booking.room.hotel.name }}</td>
+                <td>{{ booking.room.roomType }}</td>
+              
             </tr>
         </tbody>
     </table>

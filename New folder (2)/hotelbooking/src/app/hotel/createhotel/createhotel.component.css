@@ -1,6 +1,10 @@
-/* Styling the form container with a background image */
+
+
+
+
+Styling the form container with a background image */
 .container {
-    background-image: url('https://c4.wallpaperflare.com/wallpaper/693/473/71/resort-leisure-swimming-pool-resort-town-wallpaper-preview.jpg');
+  background-image: url('https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
     background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -24,7 +28,7 @@
 
 
   .form-group {
-    background-color: no-repeat;
+    background-color: #fafcfe;
     /* Semi-transparent background */
     padding: 15px;
     border-radius: 0.25rem;
@@ -40,3 +44,25 @@
     border-color: #11d5e7;
   }
 
+
+  .card:hover {
+    background-color: no-repeat;
+    /* Light gray background */
+    box-shadow: 0 4px 8px #1b74e1;
+    /* Subtle blue shadow effect */
+    transform: scale(1.02);
+    /* Slightly scale up for emphasis */
+  }
+
+
+  /* Basic button styling */
+.theme_btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Primary button theme */

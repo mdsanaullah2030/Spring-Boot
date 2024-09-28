@@ -5,8 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HotelService } from '../../service/hotel.service';
 import { Router } from '@angular/router';
 import { LocationService } from '../../service/location.service';
-import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';  // Solid star icon
-import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
+
 @Component({
   selector: 'app-createhotel',
   templateUrl: './createhotel.component.html',
@@ -21,25 +20,14 @@ export class CreatehotelComponent {
  
 
 
+  rating: { value: string, label: string }[] = [
+    { value: '**', label: '**' },
+    { value: '***', label: '***' },
+    { value: '****', label: '****' },
+    { value: '*****', label: '*****' },
+  ];
 
-
-  @Input() rating: number = 0;  // Current rating value (default 0)
-  @Input() maxStars: number = 5;  // Maximum stars (default 5)
-  @Output() ratingChange = new EventEmitter<number>();  // Event emitter for changes
-
-  faStarSolid = faStarSolid;
-  faStarRegular = faStarRegular;  // Fixed icon assignment
-
-  get stars() {
-    return Array(this.maxStars).fill(0);  // Creates an array for rendering stars
-  }
-
-  rate(star: number): void {
-    this.rating = star;
-    this.ratingChange.emit(this.rating);  // Emit the new rating value
-  }
-
-
+ 
   constructor(
     private hotelService: HotelService,
     private formBuilder: FormBuilder,
@@ -95,7 +83,7 @@ export class CreatehotelComponent {
       const hotel: HotelModel = {
         ...this.formGroup.value,
         location: { id: this.formGroup.value.location } as LocationModel,
-        rating: this.rating
+       
       };
 
       this.hotelService.createHotel(hotel, this.image).subscribe({

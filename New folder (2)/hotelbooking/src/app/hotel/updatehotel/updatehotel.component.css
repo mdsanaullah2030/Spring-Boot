@@ -1,0 +1,27 @@
+.card-img-top:hover {
+    transform: scale(1.1); /* Zoom effect */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3); /* Add shadow */
+  }
+  .card-img-top {
+    transition: transform 0.3s ease, border 0.3s ease; /* Smooth transition for both scale and border */
+}
+
+.card-img-top:hover {
+    transform: scale(1.1); /* Zoom effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow */
+    border: 4px solid white; /* Add a white border */
+}
+.container:hover {
+    background-color: no-repeat;
+    /* Light gray background */
+    box-shadow: 0 4px 8px #1b74e1;
+    /* Subtle blue shadow effect */
+    transform: scale(1.02);
+    /* Slightly scale up for emphasis */
+    text-shadow: #1b74e1;
+  }
+  .form -text {
+    
+    font-weight: bold;
+    border-bottom: 1px solid #03386d;
+  }

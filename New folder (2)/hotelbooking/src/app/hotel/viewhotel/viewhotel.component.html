@@ -9,10 +9,9 @@
 
                     <h5 class="card-title">Name: {{ h.name }}</h5>
                     <p class="card-text">Address: {{ h.address }}</p>
+                    <p class="card-text">Rating: {{ h.rating }}</p>
 
-                    <!-- Font Awesome star rating -->
-                    <fa-icon [icon]="i < rating ? faStarSolid : faStarRegular" (click)="rate(i + 1)"
-                        class="star"></fa-icon>
+                   
 
                     <p class="card-text">Price: BDT {{ h.minPrice }} - BDT {{ h.maxPrice }}</p>
                     <p class="card-text">Location: {{ h.location.name }}</p>
