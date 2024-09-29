@@ -1,0 +1,68 @@
+
+
+
+
+
+.container {
+ 
+    background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: rgb(249, 245, 245);
+      /* Ensure text is readable */
+      border-radius: 0.25rem;
+}
+.form-group {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    /* Smooth transition */
+  }
+
+  .form-group:hover {
+    background-color: no-repeat;
+    /* Light gray background */
+    box-shadow: 0 4px 8px #1b74e1;
+    /* Subtle blue shadow effect */
+    transform: scale(1.02);
+    /* Slightly scale up for emphasis */
+  }
+
+
+  .form-group {
+    background-color: #fafcfe;
+    /* Semi-transparent background */
+    padding: 15px;
+    border-radius: 0.25rem;
+  }
+
+  .btn-primary {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    /* Add transition */
+  }
+
+  .btn-primary:hover {
+    background-color: #004085;
+    border-color: #11d5e7;
+  }
+
+
+  .card:hover {
+    background-color: no-repeat;
+    /* Light gray background */
+    box-shadow: 0 4px 8px #1b74e1;
+    /* Subtle blue shadow effect */
+    transform: scale(1.02);
+    /* Slightly scale up for emphasis */
+  }
+
+
+  /* Basic button styling */
+.theme_btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Primary button theme */
