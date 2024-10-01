@@ -1,0 +1,115 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100 mt-5">
+  <div class="container mt-5">
+    <!-- Hotel Creation Form -->
+    <div class="container mt-8">
+      <h3 class="btn theme_btn button_hover">Create a New Hotel</h3>
+
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+
+
+
+
+
+
+
+
+        <div class="form-group">
+          <label for="name">
+            Name:
+          </label>
+          <input type="text" id="name" class="form-control" formControlName="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="address">
+            Address:
+          </label>
+          <input type="text" id="address" class="form-control" formControlName="address" required>
+        </div>
+
+        <div class="form-group">
+          <label for="maxPrice">
+            Maximum Price:
+          </label>
+          <input type="number" id="maxPrice" class="form-control" formControlName="maxPrice" required>
+        </div>
+
+        <div class="form-group">
+          <label for="minPrice">
+            <i class="fas fa-dollar-sign"></i> Minimum Price:
+          </label>
+          <input type="number" id="minPrice" class="form-control" formControlName="minPrice" required>
+        </div>
+
+        <div class="form-group">
+          <label for="rating">
+            Rating:
+          </label>
+          <select class="form-select" id="rating" formControlName="rating" required>
+            <option value="" disabled selected>Select a rating</option> <!-- Placeholder Option -->
+            <option *ngFor="let option of rating" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">
+            Location:
+          </label>
+          <select id="location" class="form-select" formControlName="location" required>
+            <option *ngFor="let l of locations" [ngValue]="l.id">{{ l.name }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="formFile" class="form-label">
+            Image:
+          </label>
+          <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)" accept="image/*"
+            required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Add Hotel
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Hotel Listing -->
+
+
+
+<div class="row justify-content-center mx-3">
+  <h3 class="btn theme_btn button_hover">List of Hotels</h3>
+
+
+
+
+  <div class="card md-3 m-4 py-3" style="width: 18rem;" *ngFor="let h of hotels">
+    <img [src]="'http://localhost:8080/images/hotel/' + h.image" class="card-img-top my-1" alt="{{ h.name }}">
+
+
+
+    <div class="card-body">
+      <h5 class="card-title">Name: {{ h.name }}</h5>
+      <p class="card-text">Address: {{ h.address }}</p>
+      <p class="card-text">Price: BDT {{ h.minPrice }} - BDT {{ h.maxPrice }}</p>
+      <p class="card-text">Location: {{ h.location.name }}</p>
+      <p class="card-text">Rating: {{ h.rating}}</p>
+      <div class="ml-2">
+        <button (click)="updateHotel(h.id)" class="btn theme_btn button_hover mr-2 btn-sm">
+          Edit
+        </button>
+
+        <button (click)="deleteHotel(h.id)" class="btn theme_btn  button_hover mr-2 btn-sm">
+          Delete
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
