@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Hotel Details</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    .form-label i {
+      margin-right: 8px;
+    }
+
+    .card {
+      background-image: url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: rgb(249, 245, 245);
+      /* Ensure text is readable */
+      border-radius: 0.25rem;
+    }
+
+    .form-group {
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      /* Smooth transition */
+    }
+
+    .form-group:hover {
+      background-color: no-repeat;
+      /* Light gray background */
+      box-shadow: 0 4px 8px #1b74e1;
+      /* Subtle blue shadow effect */
+      transform: scale(1.02);
+      /* Slightly scale up for emphasis */
+    }
+
+
+    .form-group {
+      background-color: no-repeat;
+      /* Semi-transparent background */
+      padding: 15px;
+      border-radius: 0.25rem;
+    }
+
+    .btn-primary {
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      /* Add transition */
+    }
+
+    .btn-primary:hover {
+      background-color: #004085;
+      border-color: #11d5e7;
+    }
+  </style>
+</head>
+
+
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            <h2 class="text-center mb-4">Register</h2>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input id="name" type="text" class="form-control" formControlName="name" />
+                <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="text-danger">
+                  <small *ngIf="registerForm.get('name')?.errors?.['required']">Name is required.</small>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input id="email" type="email" class="form-control" formControlName="email" />
+                <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                  class="text-danger">
+                  <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+                  <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email address.</small>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input id="password" type="password" class="form-control" formControlName="password" />
+                <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                  class="text-danger">
+                  <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password:</label>
+                <input id="confirmPassword" type="password" class="form-control" formControlName="confirmPassword" />
+                <div *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched"
+                  class="text-danger">
+                  <small>Passwords do not match.</small>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="cell" class="form-label">Cell:</label>
+                <input id="cell" type="text" class="form-control" formControlName="cell" />
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Address:</label>
+                <input id="address" type="text" class="form-control" formControlName="address" />
+              </div>
+              <div class="mb-3">
+                <label for="dob" class="form-label">Date of Birth:</label>
+                <input id="dob" type="date" class="form-control" formControlName="dob" />
+              </div>
+
+
+
+              <!-- Role selection (Dropdown) -->
+              <div class="mb-3">
+                <label for="role" class="form-label">Register as:</label>
+                <select id="role" class="form-select" formControlName="role">
+                  <option value="USER">User</option>
+                  <option value="ADMIN">Admin</option>
+
+                </select>
+              </div>
+
+
+              <div class="mb-3">
+                <label for="gender" class="form-label">Gender:</label>
+                <select id="gender" class="form-select" formControlName="gender">
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Image URL:</label>
+                <input id="image" type="text" class="form-control" formControlName="image" />
+              </div>
+
+
+              <div class="text-left">
+                <button type="submit" class="btn btn-primary w-10" [disabled]="registerForm.invalid">
+                  <i class="fas fa-user-plus"></i> Register
+                </button>
+              </div>
+
+
+            </form>
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+          <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
