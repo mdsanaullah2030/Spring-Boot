@@ -44,14 +44,18 @@ public class SecurityConfig {
 
                                                         "/api/location/findLocationName","/api/location/**",
 
-                                                        "/api/hotel/getHotelsByLocationId","/api/hotel/",
+                                                        "/api/hotel/getHotelsByLocationId","/api/hotel/","api/hotel/{id}",
 
-                                                         "api/room/","api/room/{id}","/api/room/r/searchroombyid","/api/room/r/searchroom",
+                                                         "api/room/","api/room/{id}","/api/room/r/searchroombyid",
+                                                        "/api/room/r/searchroom",
                                                          "/api/booking/",
                                                         "/api/booking/save","/activate/**",
                                                         "/images/**")
                                                 .permitAll()
-                                                .requestMatchers("/api/hotel/save", "/api/room/save","/api/location/save","/api/hotel/updatehotel/{id}","/api/room/updateroom/{id}","/api/location/update/{id}")
+                                                .requestMatchers("/api/hotel/save",
+                                                        "/api/room/save","/api/location/save",
+                                                        "/api/hotel/updatehotel/{id}","/api/room/updateroom/{id}",
+                                                        "/api/location/update/{id}")
                                                 .hasAuthority("ADMIN")
                                                 .requestMatchers("api/hotel/{id}", "api/room/{id}","api/hotel/all/**")
                                                 .hasAnyAuthority("ADMIN", "HOTEL")
@@ -87,7 +91,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://127.0.0.1:4200"));  // Add allowed origins
+        configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost:8181"));  // Add allowed origins
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         configuration.setAllowCredentials(true);
